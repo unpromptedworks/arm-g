@@ -1,0 +1,11 @@
+// Static assets only (CORE.md, Technical). The session may change
+// "assets.directory" to match its build output, and add a "build"
+// block whose "command" runs its build or check before every deploy.
+{
+  "name": "arm-g",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./public"
+  },
+  "previews": {}
+}

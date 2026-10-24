@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(/CORE.md)",
+      "Edit(/SESSION.md)",
+      "Edit(/EDITOR.md)",
+      "Edit(/.npmrc)",
+      "Edit(**/.claude/**)",
+      "Edit(.mcp.json)",
+      "Edit(CLAUDE.md)",
+      "Edit(AGENTS.md)",
+      "mcp__claude-code-remote__*",
+      "mcp__github__create_repository",
+      "mcp__github__fork_repository",
+      "mcp__github__merge_pull_request",
+      "mcp__github__enable_pr_auto_merge",
+      "Bash(gh api *pulls/*/merge*)"
+    ]
+  }
+}
