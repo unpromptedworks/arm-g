@@ -44,7 +44,7 @@ function lightCard(l) {
 
 function layout(meta, body, file) {
   const url = SITE + "/" + (file === "index.html" ? "" : file);
-  const nav = [["index.html", "Decoder"], ["grammar.html", "The grammar"], ["notes.html", "Notes and sources"]]
+  const nav = [["index.html", "Decoder"], ["grammar.html", "The grammar"], ["cape-cod.html", "Cape Cod"], ["notes.html", "Notes and sources"]]
     .map(([f, n]) => `<a href="/${f === "index.html" ? "" : f}"${f === file ? ' aria-current="page"' : ""}>${n}</a>`).join("");
   return `<!doctype html>
 <html lang="en">
