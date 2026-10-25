@@ -4,8 +4,11 @@
 {
   "name": "arm-g",
   "compatibility_date": "2026-09-01",
+  "build": {
+    "command": "node build.mjs"
+  },
   "assets": {
-    "directory": "./public"
+    "directory": "./dist"
   },
   "previews": {}
 }

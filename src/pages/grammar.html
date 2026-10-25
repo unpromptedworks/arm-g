@@ -1,0 +1,75 @@
+<!--{"title":"The grammar of lights: every rhythm, colour and number in a light characteristic","description":"How to read Fl, LFl, Oc, Iso, Q, VQ, UQ, Mo, Al and the numbers after them, with every rhythm animated and the cardinal marks decoded."}-->
+<section class="lede">
+  <h1>The grammar</h1>
+  <p>A characteristic is a sentence in a fixed order: how the light moves, what colour it is, how long before it repeats, how high it stands and how far it reaches. Most of the time only the first three matter to you.</p>
+</section>
+
+<div class="anatomy" aria-label="Fl(2) W 10s 15m 18M, part by part">
+  <span>Fl(2)<small>rhythm</small></span>
+  <span>W<small>colour</small></span>
+  <span>10s<small>period</small></span>
+  <span>15m<small>height</small></span>
+  <span>18M<small>range</small></span>
+</div>
+<div class="prose">
+  <p><strong>Rhythm</strong> is the pattern of light and dark, with a group count in brackets. <strong>Colour</strong> is W, R, G, Y or Bu; when no colour is written, the light is white. <strong>Period</strong> is the time for the whole pattern to run once. <strong>Height</strong> is the light's elevation in metres (in US light lists, feet). <strong>Range</strong> is in nautical miles, a capital M: how far the chart says it carries. Sources for each rule are at the foot of the page.</p>
+</div>
+
+<h2>Lit less than dark: flashing</h2>
+<div class="prose"><p>In a flashing light, the light is on for less time, in total, than it is off. A long flash lasts two seconds or more. Flashes can come in groups, and a group can be composite: <code>Fl(2+1)</code> is two flashes, a pause, one flash, then the long dark. The gap between groups is at least three times the gap inside one, which is how the eye sorts a run of flashes into words.</p></div>
+<div class="pair">
+  <light char="Fl G 3s"></light>
+  <light char="LFl 10s"></light>
+  <light char="Fl(3) R 12s"></light>
+  <light char="Fl(2+1) G 15s"></light>
+</div>
+
+<h2>Lit more than dark: occulting and isophase</h2>
+<div class="prose"><p>Turn a flashing light inside out and you have an occulting one: on for longer, in total, than it is off, so what you notice are the eclipses. Groups work the same way. An isophase light is the balance point between the two: light and dark of exactly equal length.</p></div>
+<div class="pair">
+  <light char="Oc 6s"></light>
+  <light char="Oc(2) R 8s"></light>
+  <light char="Iso G 4s"></light>
+  <light char="Iso 8s"></light>
+</div>
+
+<h2>Too fast to count: quick, very quick, ultra quick</h2>
+<div class="prose"><p>Past a certain speed, flashes stop being things you count and become a texture. The Canadian Hydrographic Service's Chart 1 sets the bands by flashes a minute: quick, 50 to 79 (usually 50 or 60); very quick, 80 to 159 (usually 100 or 120); ultra quick, 160 or more. Here they are drawn at 60, 120 and 240. Written alone, <code>Q</code> runs without a break; with a bracket and a period, it comes in groups; with an I in front, its run of flashes is broken by a regular dark pause.</p></div>
+<div class="pair">
+  <light char="Q"></light>
+  <light char="VQ"></light>
+  <light char="UQ"></light>
+  <light char="IQ G 12s"></light>
+</div>
+
+<h2>Spelled out: Morse</h2>
+<div class="prose"><p><code>Mo(A)</code> flashes the letter A: a short flash and a long one. Safe-water marks, which usually mean open, deep water lies ahead, often use it.</p></div>
+<div class="pair">
+  <light char="Mo(A) 8s"></light>
+  <light char="Mo(U) 15s"></light>
+</div>
+
+<h2>Several colours: alternating and sectored</h2>
+<div class="prose"><p>Two colours written together mean one of two things. With <code>Al</code> in front, the light changes colour as it runs, so everyone sees both colours. Without it, the colours are sectors: the lantern shows a different colour in different directions, and the colour you see tells you which arc you are standing in. Choose a sector below to see what a ship in it would see.</p></div>
+<div class="pair">
+  <light char="Al.Fl WR 10s"></light>
+  <light char="Fl WRG 5s 12m 15M"></light>
+</div>
+
+<h2>A worked set: the cardinal marks</h2>
+<div class="prose"><p>A cardinal mark is a buoy or beacon that tells you which side of a hazard to pass: a north mark has the safe water to its north. Their lights are white, quick or very quick, and they count like a clock face. East is three flashes, as three o'clock is; south is six; west is nine. North flashes without stopping. South adds one long flash to help tell it from west in poor conditions. Each comes in a quick and a very quick version, so two marks near each other can differ.</p></div>
+<div class="pair">
+  <light char="VQ" label="North"></light>
+  <light char="VQ(3) 5s" label="East"></light>
+  <light char="VQ(6)+LFl 10s" label="South"></light>
+  <light char="VQ(9) 10s" label="West"></light>
+  <light char="Q" label="North, quick"></light>
+  <light char="Q(3) 10s" label="East, quick"></light>
+  <light char="Q(6)+LFl 15s" label="South, quick"></light>
+  <light char="Q(9) 15s" label="West, quick"></light>
+</div>
+
+<h2>Sources</h2>
+<div class="prose">
+  <p class="aside">Definitions of flashing, occulting, isophase and long-flashing, and the quick, very quick and ultra quick rates: Canadian Hydrographic Service, <a href="https://cartes.gc.ca/publications/chart1-carte1/sections/p-lights/lightcharacters-eng.html">Chart 1, section P, light characters</a>. Group spacing, composite groups, Morse, alternating lights, the implied white and the order of the abbreviation: <a href="https://en.wikipedia.org/wiki/Light_characteristic">Light characteristic</a>, Wikipedia. Cardinal mark rhythms and the clock-face rule: <a href="https://en.wikipedia.org/wiki/Cardinal_mark">Cardinal mark</a>, Wikipedia. Safe-water marks and Morse A: <a href="https://en.wikipedia.org/wiki/Safe_water_mark">Safe water mark</a>, Wikipedia.</p>
+</div>
