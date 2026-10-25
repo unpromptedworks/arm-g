@@ -1,0 +1,141 @@
+@font-face { font-family: "Atkinson Next"; src: url("/fonts/atkinson-hyperlegible-next-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Atkinson Next"; src: url("/fonts/atkinson-hyperlegible-next-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Atkinson Next"; src: url("/fonts/atkinson-hyperlegible-next-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Atkinson Mono"; src: url("/fonts/atkinson-hyperlegible-mono-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Atkinson Mono"; src: url("/fonts/atkinson-hyperlegible-mono-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+:root {
+  color-scheme: dark;
+  --night: #070a10;
+  --sea: #0d131c;
+  --rule: #1f2a38;
+  --ink: #c9d2dc;
+  --dim: #7d8a99;
+  --bright: #f3f0e6;
+  --lamp-w: #fff6dc;
+  --lamp-r: #ff4b3e;
+  --lamp-g: #34e39a;
+  --lamp-y: #ffcf3a;
+  --lamp-bu: #5aa8ff;
+  --sans: "Atkinson Next", system-ui, sans-serif;
+  --mono: "Atkinson Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--night); }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--bright); text-decoration-color: #4a5868; text-underline-offset: 0.2em; }
+a:hover { text-decoration-color: var(--lamp-w); }
+code, .char { font-family: var(--mono); }
+h1, h2, h3 { color: var(--bright); line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); margin: 0 0 0.4em; max-width: 18ch; }
+h2 { font-size: 1.55rem; margin: 2.6rem 0 0.6rem; }
+h3 { font-size: 1.15rem; margin: 0; }
+p { margin: 0 0 1em; }
+
+.top, main, .foot { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.5rem 1.5rem; padding-top: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--rule); }
+.mark { font-weight: 700; color: var(--bright); text-decoration: none; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 0.55rem; }
+.mark-lamp { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--lamp-w); box-shadow: 0 0 10px 2px rgba(255, 246, 220, 0.6); animation: mark 5s infinite; }
+@keyframes mark { 0%, 8% { opacity: 1; } 12%, 18% { opacity: 0.15; } 22%, 30% { opacity: 1; } 34%, 100% { opacity: 0.15; } }
+.top nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.1rem; font-size: 0.95rem; }
+.top nav a { color: var(--dim); text-decoration: none; }
+.top nav a[aria-current="page"], .top nav a:hover { color: var(--bright); }
+
+.lede { padding: 2.6rem 0 0.5rem; }
+.lede p { max-width: 38rem; font-size: 1.15rem; color: var(--ink); }
+.prose { max-width: 40rem; }
+.prose p, .prose li { max-width: 40rem; }
+.aside { color: var(--dim); font-size: 0.95rem; }
+
+/* The player: a lamp on the left, the reading on the right. */
+.light { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1.1rem; align-items: start; margin: 1.1rem 0; }
+.lamp-wrap { width: 5.5rem; height: 5.5rem; display: grid; place-items: center; background: radial-gradient(circle at 50% 50%, #0f1824 0, var(--night) 70%); border-radius: 50%; }
+.lamp { --c: var(--lamp-w); width: 1.6rem; height: 1.6rem; border-radius: 50%; background: #1b232e; box-shadow: inset 0 0 0 1px #2b3644; transition: background-color 70ms linear, box-shadow 70ms linear; }
+.lamp.on { background: var(--c); box-shadow: 0 0 14px 4px color-mix(in srgb, var(--c) 70%, transparent), 0 0 46px 16px color-mix(in srgb, var(--c) 28%, transparent); }
+.lamp.on.still { box-shadow: 0 0 10px 2px color-mix(in srgb, var(--c) 45%, transparent); }
+.light-body { display: block; min-width: 0; }
+.light-label { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); }
+.char { display: block; font-size: 1.25rem; color: var(--bright); font-weight: 700; margin-bottom: 0.35rem; overflow-wrap: anywhere; }
+.ribbon { display: block; width: 100%; height: 3rem; }
+.ribbon .rib-base { fill: #2a3646; }
+.ribbon .rib-tick { fill: #3a4859; }
+.ribbon .rib-head { fill: #9fb0c3; }
+.axis { display: flex; justify-content: space-between; font: 0.75rem/1 var(--mono); color: var(--dim); margin: -0.2rem 0 0.6rem; }
+.reading { display: block; margin-bottom: 0.4rem; }
+.reading.err { color: var(--lamp-y); }
+.note { display: block; font-size: 0.85rem; color: var(--dim); }
+.note:empty { display: none; }
+.sectors { display: block; font-size: 0.9rem; margin-bottom: 0.4rem; }
+.sectors[hidden] { display: none; }
+.play, .chip {
+  font: 0.85rem/1 var(--sans);
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+}
+.play:hover, .chip:hover { border-color: var(--dim); color: var(--bright); }
+.chip[aria-pressed="true"] { border-color: var(--bright); color: var(--bright); }
+.play:focus-visible, .chip:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--lamp-y); outline-offset: 2px; }
+
+/* Decoder */
+.decoder { border: 1px solid var(--rule); border-radius: 6px; padding: 1.4rem 1.4rem 1.1rem; background: var(--sea); margin: 1.4rem 0 0.6rem; }
+.decoder label { display: block; font-size: 0.85rem; color: var(--dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+#char-input {
+  width: 100%;
+  font: 700 1.5rem/1.2 var(--mono);
+  color: var(--bright);
+  background: var(--night);
+  border: 1px solid #334155;
+  border-radius: 4px;
+  padding: 0.55rem 0.7rem;
+}
+.decoder .light { grid-template-columns: 8rem 1fr; margin-top: 1.3rem; }
+.decoder .lamp-wrap { width: 8rem; height: 8rem; }
+.decoder .lamp { width: 2.2rem; height: 2.2rem; }
+.decoder .char { display: none; }
+.tries { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.7rem 0 0; font-size: 0.85rem; color: var(--dim); align-items: center; }
+.tries .chip { font-family: var(--mono); }
+
+/* Gallery of real lights */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 30rem), 1fr)); gap: 0 2.5rem; }
+.card { border-top: 1px solid var(--rule); padding: 1.3rem 0 1.1rem; }
+.place { color: var(--dim); font-size: 0.9rem; margin: 0.1rem 0 0.2rem; }
+.card-note { margin: 0.4rem 0 0.5rem; }
+.src { font-size: 0.8rem; color: var(--dim); margin: 0; }
+.src a { color: var(--dim); }
+
+/* Grammar page */
+.rule-table { border-collapse: collapse; width: 100%; margin: 1rem 0 1.5rem; font-size: 0.95rem; }
+.rule-table th, .rule-table td { text-align: left; padding: 0.5rem 0.8rem 0.5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.rule-table th { color: var(--dim); font-weight: 400; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.07em; }
+.rule-table td:first-child { font-family: var(--mono); color: var(--bright); white-space: nowrap; }
+.table-wrap { overflow-x: auto; }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 0 2rem; }
+.anatomy { font: 700 clamp(1.4rem, 5vw, 2.4rem)/1.3 var(--mono); color: var(--bright); margin: 1rem 0 0.4rem; display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; }
+.anatomy span { display: inline-flex; flex-direction: column; }
+.anatomy small { font: 400 0.75rem/1.3 var(--sans); color: var(--dim); text-transform: uppercase; letter-spacing: 0.07em; }
+
+.foot { border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1.2rem; padding-bottom: 2.5rem; font-size: 0.85rem; color: var(--dim); }
+.foot p { max-width: 44rem; }
+.foot a { color: var(--ink); }
+
+@media (max-width: 34rem) {
+  .light, .decoder .light { grid-template-columns: 4.2rem 1fr; gap: 0.8rem; }
+  .lamp-wrap, .decoder .lamp-wrap { width: 4.2rem; height: 4.2rem; }
+  .decoder { padding: 1rem; }
+  #char-input { font-size: 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mark-lamp { animation: none; }
+  .lamp { transition: none; }
+}

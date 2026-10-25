@@ -1,0 +1,128 @@
+[
+  {
+    "id": "minots-ledge",
+    "name": "Minot's Ledge",
+    "place": "Off Cohasset, Massachusetts, USA",
+    "chars": [
+      "Fl(1+4+3) W 45s 26m 10M"
+    ],
+    "note": "One flash, four, then three. Since 1 May 1894 the light has flashed this group, and because \"I love you\" has one, four and three letters, the tower is known locally as the \"I love you\" light. Count the dark between groups: it is what separates 1, 4 and 3 from a run of eight.",
+    "sources": [
+      {
+        "title": "Minot's Ledge Light",
+        "url": "https://en.wikipedia.org/wiki/Minot%27s_Ledge_Light"
+      }
+    ]
+  },
+  {
+    "id": "cape-hatteras",
+    "name": "Cape Hatteras",
+    "place": "Buxton, North Carolina, USA",
+    "chars": [
+      "Fl W 7.5s 57m 24M"
+    ],
+    "note": "A one-second flash and a six-and-a-half-second eclipse: 7.5 s in all. The flash count tells you nothing here, so the period has to: time two flashes, not one.",
+    "sources": [
+      {
+        "title": "Cape Hatteras Lighthouse",
+        "url": "https://en.wikipedia.org/wiki/Cape_Hatteras_Lighthouse"
+      }
+    ]
+  },
+  {
+    "id": "portland-head",
+    "name": "Portland Head",
+    "place": "Cape Elizabeth, Maine, USA",
+    "chars": [
+      "Fl W 4s 31m 24M"
+    ],
+    "note": "The same grammar as Hatteras, a single white flash, but nearly twice as fast. Side by side, the two lights differ only in their period.",
+    "sources": [
+      {
+        "title": "Portland Head Light",
+        "url": "https://en.wikipedia.org/wiki/Portland_Head_Light"
+      }
+    ]
+  },
+  {
+    "id": "fastnet",
+    "name": "Fastnet",
+    "place": "Fastnet Rock, off County Cork, Ireland",
+    "chars": [
+      "Fl W 5s 49m 28M"
+    ],
+    "note": "Another single white flash, at five seconds. Three lights in a row with the same letters show why the number after them matters most.",
+    "sources": [
+      {
+        "title": "Fastnet Lighthouse",
+        "url": "https://en.wikipedia.org/wiki/Fastnet_Lighthouse"
+      }
+    ]
+  },
+  {
+    "id": "bishop-rock",
+    "name": "Bishop Rock",
+    "place": "Isles of Scilly, England",
+    "chars": [
+      "Fl(2) W 15s 44m 20M"
+    ],
+    "note": "Two flashes close together, then a long dark. A group is read as one word: the pair belongs together because the gap inside it is much shorter than the gap after it.",
+    "sources": [
+      {
+        "title": "Bishop Rock Lighthouse",
+        "url": "https://en.wikipedia.org/wiki/Bishop_Rock_Lighthouse"
+      }
+    ]
+  },
+  {
+    "id": "eddystone",
+    "name": "Eddystone",
+    "place": "Off Plymouth, England",
+    "chars": [
+      "Fl(2) W 10s 41m 17M",
+      "Iso R 10s 28m"
+    ],
+    "note": "Two lights on one tower. The main light flashes white in pairs; a lower window shows a red isophase light toward the Hand Deeps, a hazard to the west-northwest. See the red and you are in the arc that covers the danger.",
+    "sources": [
+      {
+        "title": "Eddystone Lighthouse",
+        "url": "https://en.wikipedia.org/wiki/Eddystone_Lighthouse"
+      }
+    ]
+  },
+  {
+    "id": "cape-byron",
+    "name": "Cape Byron",
+    "place": "Byron Bay, New South Wales, Australia",
+    "chars": [
+      "Fl W 15s 118m 27M",
+      "F R 111m 8M"
+    ],
+    "note": "A slow white flash high on the headland, and a fixed red light seven metres below it with a far shorter charted range: 27 nautical miles for the white, 8 for the red.",
+    "sources": [
+      {
+        "title": "Cape Byron Light",
+        "url": "https://en.wikipedia.org/wiki/Cape_Byron_Light"
+      }
+    ]
+  },
+  {
+    "id": "sandy-hook",
+    "name": "Sandy Hook",
+    "place": "Sandy Hook, New Jersey, USA",
+    "chars": [
+      "F W 27m 19M"
+    ],
+    "note": "A fixed light: no rhythm at all. A steady light says nothing distinctive about itself, which is why the IALA buoyage system does not use fixed lights on its marks.",
+    "sources": [
+      {
+        "title": "Sandy Hook Light",
+        "url": "https://en.wikipedia.org/wiki/Sandy_Hook_Light"
+      },
+      {
+        "title": "Light characteristic",
+        "url": "https://en.wikipedia.org/wiki/Light_characteristic"
+      }
+    ]
+  }
+]
