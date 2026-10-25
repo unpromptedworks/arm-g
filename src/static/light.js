@@ -74,6 +74,8 @@ export function parse(input) {
     if ((m = t.match(/^(\d+(?:\.\d+)?)(?:\/\d+(?:\.\d+)?)*M$/))) { out.range = t.slice(0, -1); continue; }
     throw new Error(`Couldn't read "${t}". Try something like Fl(2) W 10s or Oc R 4s.`);
   }
+  // Al WR 3s, with no rhythm, is an alternating fixed light.
+  if (!out.rhythm && out.alternating) out.rhythm = "F";
   if (!out.rhythm) throw new Error("No rhythm found. A characteristic starts with one, such as F, Fl, Oc, Iso, Q or Mo.");
   if (out.rhythm === "Mo" && !out.letter) throw new Error("Morse lights name their letter, as in Mo(A) 8s.");
   if (!out.colors.length) { out.colors = ["W"]; out.whiteImplied = true; }
@@ -200,17 +202,20 @@ function segments(c) {
 }
 
 export function timeline(c) {
-  const t = segments(c);
+  let t = segments(c);
   // Colour each lit segment. Alternating lights step through their colours,
   // one per lit segment; a sectored light shows one colour, chosen by the reader.
-  t.basePeriod = t.period;
+  // The period of an alternating light covers every colour (Al WR 3s is
+  // white 1.5 s, red 1.5 s), so each colour gets an equal share of it.
   const litCount = t.seg.filter((s) => s.on).length;
   if (c.alternating && litCount < c.colors.length) {
     const n = c.colors.length;
+    if (c.period) t = segments({ ...c, period: c.period / n });
+    t.step = t.period;
     t.seg = Array.from({ length: n }, () => t.seg.map((s) => ({ ...s }))).flat();
     t.period *= n;
-    t.notes.push(`${cap(word(n))} periods shown, so every colour appears.`);
   }
+  t.basePeriod = t.period;
   let i = 0;
   for (const s of t.seg) {
     if (s.on) { s.color = c.alternating ? c.colors[i % c.colors.length] : null; i++; }
@@ -234,7 +239,7 @@ function colorList(names) {
 
 export function describe(c) {
   const t = { ...timeline(c) };
-  t.period = t.basePeriod;
+  t.period = t.step || t.basePeriod;
   const names = c.colors.map((k) => COLORS[k].name);
   const sector = !c.alternating && c.colors.length > 1;
   const col = c.alternating ? "" : sector ? "" : names[0] + " ";
@@ -247,7 +252,7 @@ export function describe(c) {
       s = c.alternating ? `A steady light that changes colour, ${names.join(" then ")}, and never goes dark.` : `A fixed ${col}light: steady, never dark.`;
       break;
     case "Iso":
-      s = `${cap(col)}light and darkness in equal halves, one full cycle ${every(c.period || t.period)}.`;
+      s = `${cap(col + "light")} and darkness in equal halves, one full cycle ${every(t.period)}.`;
       break;
     case "Fl":
     case "LFl": {
@@ -288,7 +293,7 @@ export function describe(c) {
       break;
     }
   }
-  if (c.alternating && c.rhythm !== "F") s += ` Its colour alternates: ${names.join(", then ")}.`;
+  if (c.alternating && c.rhythm !== "F") s += ` Its colour alternates: ${names.join(", then ")}${t.step ? `, so the whole cycle of colours repeats ${every(t.basePeriod)}` : ""}.`;
   if (sector) s += ` It shows ${colorList(names)} depending on where you stand: a sectored light.`;
   if (c.height) s += ` The light stands ${fmt(c.height)} m above high water.`;
   if (c.range) s += ` Its charted range is ${c.range.replace("/", " / ")} nautical miles.`;

@@ -139,3 +139,14 @@ p { margin: 0 0 1em; }
   .mark-lamp { animation: none; }
   .lamp { transition: none; }
 }
+
+/* Cape Cod: stations told apart by their number of towers */
+.towers { display: flex; flex-wrap: wrap; gap: 1.2rem 3rem; margin: 1.4rem 0 1.6rem; }
+.towers > div { display: flex; flex-direction: column; gap: 0.2rem; min-width: 8rem; }
+.t-lamps { display: flex; gap: 0.9rem; height: 2.2rem; align-items: center; }
+.t-lamps i { width: 0.9rem; height: 0.9rem; border-radius: 50%; background: var(--lamp-w); box-shadow: 0 0 10px 3px color-mix(in srgb, var(--lamp-w) 50%, transparent), 0 0 30px 10px color-mix(in srgb, var(--lamp-w) 18%, transparent); }
+.towers b { color: var(--bright); }
+.towers small { color: var(--dim); font-size: 0.85rem; }
+.pair.trio { grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 0 1.6rem; }
+.src-list { padding-left: 1.1rem; }
+.src-list li { margin-bottom: 0.5rem; }
