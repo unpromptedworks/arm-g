@@ -82,8 +82,25 @@ export function parse(input) {
   return out;
 }
 
+// Exact timings, as light lists give them: alternating light and dark
+// lengths in seconds, starting with light ("1 0.25 0.5 0.25 1 3").
+export function parseTiming(text, c) {
+  const d = String(text).trim().split(/\s+/).map(Number);
+  if (!d.length || d.some((x) => !(x > 0))) throw new Error(`Couldn't read the timings "${text}".`);
+  if (d.length % 2) throw new Error("Timings alternate light and dark, so there must be an even number.");
+  const sum = d.reduce((a, b) => a + b, 0);
+  if (c.period && Math.abs(sum - c.period) > 0.01) throw new Error(`The timings add up to ${fmt(sum)} s, not the ${fmt(c.period)} s period.`);
+  return d;
+}
+
 // Light and dark segments for one period. Each segment: { on, dur, kind }.
 function segments(c) {
+  if (c.timing) {
+    const lit = c.timing.filter((_, i) => i % 2 === 0);
+    const short = Math.min(...lit);
+    const seg = c.timing.map((dur, i) => (i % 2 ? { on: false, dur } : { on: true, dur, kind: dur > short * 1.5 ? "dash" : "dot" }));
+    return { seg, period: c.timing.reduce((a, b) => a + b, 0), notes: ["Drawn with the exact flash and eclipse lengths given on this page."] };
+  }
   const seg = [];
   const on = (dur, kind = "flash") => seg.push({ on: true, dur, kind });
   const off = (dur) => seg.push({ on: false, dur });
@@ -362,6 +379,7 @@ class Player {
     this.error = null;
     try {
       this.c = parse(text);
+      if (this.el.dataset.timing && text === this.el.dataset.char) this.c.timing = parseTiming(this.el.dataset.timing, this.c);
       this.t = timeline(this.c);
     } catch (e) {
       this.error = e.message;

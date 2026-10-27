@@ -3,7 +3,7 @@
 // every page for the tags CORE.md requires. No dependencies.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, copyFileSync, rmSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { parse, describe, timeline } from "./src/static/light.js";
+import { parse, parseTiming, describe, timeline } from "./src/static/light.js";
 
 const SITE = "https://night-grammar.unpromptedworks.com";
 const OUT = "dist";
@@ -11,12 +11,13 @@ const lights = JSON.parse(readFileSync("src/lights.json", "utf8"));
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-export function lightFigure(char, { id = "", label = "" } = {}) {
+export function lightFigure(char, { id = "", label = "", timing = "" } = {}) {
   const c = parse(char);
+  if (timing) c.timing = parseTiming(timing, c);
   const t = timeline(c);
   const reading = describe(c);
   const end = Math.round(t.period * 100) / 100;
-  return `<figure class="light"${id ? ` id="${id}"` : ""} data-char="${esc(char)}">
+  return `<figure class="light"${id ? ` id="${id}"` : ""} data-char="${esc(char)}"${timing ? ` data-timing="${esc(timing)}"` : ""}>
   <div class="lamp-wrap"><div class="lamp on still" style="--c:var(--lamp-${c.colors[0].toLowerCase()})" aria-hidden="true"></div></div>
   <figcaption class="light-body">
     ${label ? `<span class="light-label">${esc(label)}</span>` : ""}<code class="char">${esc(char)}</code>
@@ -44,7 +45,7 @@ function lightCard(l) {
 
 function layout(meta, body, file) {
   const url = SITE + "/" + (file === "index.html" ? "" : file);
-  const nav = [["index.html", "Decoder"], ["grammar.html", "The grammar"], ["cape-cod.html", "Cape Cod"], ["notes.html", "Notes and sources"]]
+  const nav = [["index.html", "Decoder"], ["grammar.html", "The grammar"], ["cape-cod.html", "Cape Cod"], ["morse.html", "Morse"], ["notes.html", "Notes and sources"]]
     .map(([f, n]) => `<a href="/${f === "index.html" ? "" : f}"${f === file ? ' aria-current="page"' : ""}>${n}</a>`).join("");
   return `<!doctype html>
 <html lang="en">
@@ -87,7 +88,7 @@ function render(src) {
   if (!m) throw new Error("page is missing its front matter");
   const meta = JSON.parse(m[1]);
   let body = src.slice(m[0].length);
-  body = body.replace(/<light char="([^"]+)"(?: id="([^"]+)")?(?: label="([^"]+)")?><\/light>/g, (_, ch, id, label) => lightFigure(ch, { id, label }));
+  body = body.replace(/<light char="([^"]+)"(?: id="([^"]+)")?(?: label="([^"]+)")?(?: timing="([^"]+)")?><\/light>/g, (_, ch, id, label, timing) => lightFigure(ch, { id, label, timing }));
   body = body.replace(/<lights-gallery><\/lights-gallery>/g, () => `<div class="gallery">\n${lights.map(lightCard).join("\n")}\n</div>`);
   return { meta, body };
 }
