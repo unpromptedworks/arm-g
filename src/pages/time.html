@@ -1,0 +1,59 @@
+<!--{"title":"Time a light: hold while it shines, and read what it was","description":"Hold a button while a light is lit and let go when it goes dark. Night Grammar works out its characteristic, such as Fl(2) W 10s, and finds the lights on the site that fit.","script":"watch.js"}-->
+<section class="lede">
+  <h1>Hold while it shines. Let go when it's dark.</h1>
+  <p>You have seen a light and you don't know what it said. Hold the button below for as long as the light is lit and let go when it goes out, until it has come round at least twice; three times is better. The page times you, counts the groups, and writes the characteristic a chart would print.</p>
+</section>
+
+<section class="timer" aria-label="Timer">
+  <div class="timer-row">
+    <button id="hold" class="hold" type="button" aria-pressed="false" aria-describedby="hold-help"><span class="hold-lamp" aria-hidden="true"></span><span class="hold-word">Hold</span></button>
+    <div class="practice" aria-label="Practice lamp"><div class="practice-lamp-wrap"><div id="practice-lamp" class="lamp" aria-hidden="true"></div></div><span class="practice-lab">Practice lamp</span></div>
+    <div class="timer-side">
+      <p id="hold-help" class="aside">Press and hold with a finger or the mouse, or hold the space bar once the button has focus.</p>
+      <div class="tries" role="group" aria-label="Colour of the light"><span>Colour</span>
+        <button class="chip" type="button" data-colour="W" aria-pressed="true">white</button>
+        <button class="chip" type="button" data-colour="R" aria-pressed="false">red</button>
+        <button class="chip" type="button" data-colour="G" aria-pressed="false">green</button>
+        <button class="chip" type="button" data-colour="Y" aria-pressed="false">yellow</button>
+      </div>
+      <p class="practice-line">No light in sight? The practice lamp plays one from this site, unlabelled. Time it, then check.</p>
+      <div class="tries"><button class="chip" type="button" id="practice-new">Show me a light</button><button class="chip" type="button" id="practice-reveal" disabled>What was it?</button><button class="chip" type="button" id="reset">Start again</button></div>
+      <p id="practice-answer" class="practice-answer" aria-live="polite" hidden></p>
+    </div>
+  </div>
+  <span class="trace-lab">What you held</span>
+  <svg id="trace" class="trace" viewBox="0 0 600 34" preserveAspectRatio="none" role="img" aria-label="Your presses drawn as bars of light over time; thin marks show where each measured round begins"></svg>
+  <span class="axis"><span>0 s</span><span id="trace-end">10 s</span></span>
+  <p id="status" class="status" aria-live="polite">Nothing timed yet.</p>
+  <noscript><p class="status">The timer needs JavaScript. Without it, time the light with a watch: count seconds from the first flash of one group to the first flash of the next, count the flashes in a group, and type what you found into <a href="/">the decoder</a>.</p></noscript>
+  <div id="result" class="result" hidden>
+    <p class="result-lab">It reads as</p>
+    <p class="result-char"><code id="guess-char">Fl W 5s</code></p>
+    <light char="Fl W 5s" id="guess"></light>
+    <h2 id="match-head" class="match-head">Lights on this site that fit</h2>
+    <ul id="matches" class="matches"></ul>
+  </div>
+</section>
+
+<light-index></light-index>
+
+<h2>How it reads you</h2>
+<div class="prose">
+  <p>It works in the order this site argues you should: <a href="/#time-first">time it first, count it second, read the letters last</a>. So its first number is also the one it is surest of.</p>
+  <p><strong>The period.</strong> The page marks the first flash of each round and divides the time between the first mark and the last by the number of rounds. Your thumb comes down a little late on every press, but it is late by about the same amount each time, so the delay cancels out of the period. Periods are listed as round numbers: every light on this site has a whole number of seconds, or a half (Cape Hatteras, 7.5). So the measured period is rounded to the nearest half second below ten and the nearest second above, and the page tells you both numbers.</p>
+  <p><strong>The count.</strong> It sorts the dark gaps between your presses by length and looks for jumps. The shortest gaps join flashes into a group; the longest end a round. If there is a third length between them, it separates the parts of a composite group, which is how <a href="/#minots-ledge">Minot's Ledge</a> comes out as 1, 4 and 3 and not as eight. It reads the pattern from the rounds in the middle of your timing, because you may have started or stopped part-way through one.</p>
+  <p><strong>The letters.</strong> Last, it looks at how long you held. If the light was on for most of the time, it was occulting, and the gaps in your presses are what it counts. Light and dark in about equal halves is isophase. Flashes of two clearly different lengths in one short group are read as a Morse letter. A long flash, <code>LFl</code>, is two seconds or more by definition; because a thumb tends to let go early, the timer reads every flash over about 1.3 s as long, and says so when your flashes were shorter than two seconds.</p>
+</div>
+
+<h2>Where it will be wrong</h2>
+<div class="prose">
+  <p>Very quick lights flash 80 to 159 times a minute, two or so a second, which is faster than most thumbs can follow press for press. If you miss a flash or two, the count comes out one short. For a cardinal mark it is better to count the flashes aloud and use the timer only for the period.</p>
+  <p>A Morse O and three long flashes are the same thing to a watcher: three flashes of one length. The timer reads both as <code>LFl(3)</code>, for the reason set out on <a href="/morse.html">the Morse page</a>, and its list of matches includes lights listed as Morse O.</p>
+  <p>It sees rhythm, not colour. Pick the colour you saw. A light that alternates colours, such as Nauset's white and red, will come out with half its listed period, because a list's period covers every colour once; count the colours yourself. A sector light shows you only the colour of the sector you are in, which is the one to pick.</p>
+  <p>The list of matches holds only the lights on this site. An official light list holds thousands, and two lights with the same characteristic are often far apart. The timer tells you what a light said; to know which light it was, find a light with that characteristic on the chart for where you are.</p>
+</div>
+
+<h2>Sources</h2>
+<div class="prose">
+  <p class="aside">The quick, very quick and ultra quick rates (50 to 79, 80 to 159, and 160 or more flashes a minute) and the definitions of occulting and isophase: Canadian Hydrographic Service, <a href="https://cartes.gc.ca/publications/chart1-carte1/sections/p-lights/lightcharacters-eng.html">Chart 1, section P, light characters</a>. A long flash of two seconds or more, and Morse characters: <a href="https://en.wikipedia.org/wiki/Light_characteristic">Light characteristic</a>, Wikipedia (CC BY-SA 4.0). The lights it matches against are the ones on this site, each sourced on its own page. The thresholds the timer uses to sort your presses (1.3 s for a long flash, lit more than 62% of the time for occulting, 42% to 62% for isophase) are this site's choices, not rules from a list.</p>
+</div>

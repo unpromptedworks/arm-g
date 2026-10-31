@@ -45,7 +45,7 @@ function lightCard(l) {
 
 function layout(meta, body, file) {
   const url = SITE + "/" + (file === "index.html" ? "" : file);
-  const nav = [["index.html", "Decoder"], ["grammar.html", "The grammar"], ["cape-cod.html", "Cape Cod"], ["morse.html", "Morse"], ["notes.html", "Notes and sources"]]
+  const nav = [["index.html", "Decoder"], ["grammar.html", "The grammar"], ["cape-cod.html", "Cape Cod"], ["morse.html", "Morse"], ["time.html", "Time a light"], ["notes.html", "Notes and sources"]]
     .map(([f, n]) => `<a href="/${f === "index.html" ? "" : f}"${f === file ? ' aria-current="page"' : ""}>${n}</a>`).join("");
   return `<!doctype html>
 <html lang="en">
@@ -64,7 +64,7 @@ function layout(meta, body, file) {
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/style.css">
-<script type="module" src="/light.js"></script>
+<script type="module" src="/light.js"></script>${meta.script ? `\n<script type="module" src="/${meta.script}"></script>` : ""}
 </head>
 <body>
 <header class="top">
@@ -83,6 +83,24 @@ ${body}
 `;
 }
 
+// Every real light (and every standard mark) on the site, for the timing
+// tool to match against. Labels are rewritten so they stand alone in a list.
+const INDEX_LABELS = {
+  "cape-cod.html": { "Highland, Truro": "Highland, Cape Cod", "Chatham": "Chatham, Cape Cod", "Nauset, Eastham": "Nauset, Cape Cod", "Race Point": "Race Point, Cape Cod", "Wood End": "Wood End, Cape Cod", "Long Point": "Long Point, Cape Cod" },
+  "morse.html": { "Offshore platform, UK waters": "Offshore platform, UK waters", "Its corners": "Offshore platform, red corner lights", "Safe-water mark": "Safe-water mark", "Gabicce Mare, as listed": "Gabicce Mare, Italy" },
+  "grammar.html": { "North": "North cardinal mark", "East": "East cardinal mark", "South": "South cardinal mark", "West": "West cardinal mark", "North, quick": "North cardinal mark, quick", "East, quick": "East cardinal mark, quick", "South, quick": "South cardinal mark, quick", "West, quick": "West cardinal mark, quick" },
+};
+function lightIndex() {
+  const out = lights.flatMap((l) => l.chars.slice(0, 1).map((char) => ({ char, label: l.name, href: `/#${l.id}` })));
+  for (const [file, labels] of Object.entries(INDEX_LABELS)) {
+    const src = readFileSync(join("src/pages", file), "utf8");
+    for (const [, char, label] of src.matchAll(/<light char="([^"]+)"(?: id="[^"]+")? label="([^"]+)"/g)) {
+      if (labels[label]) out.push({ char, label: labels[label], href: `/${file}` });
+    }
+  }
+  return out;
+}
+
 function render(src) {
   const m = src.match(/^<!--(\{[\s\S]*?\})-->\n/);
   if (!m) throw new Error("page is missing its front matter");
@@ -90,6 +108,7 @@ function render(src) {
   let body = src.slice(m[0].length);
   body = body.replace(/<light char="([^"]+)"(?: id="([^"]+)")?(?: label="([^"]+)")?(?: timing="([^"]+)")?><\/light>/g, (_, ch, id, label, timing) => lightFigure(ch, { id, label, timing }));
   body = body.replace(/<lights-gallery><\/lights-gallery>/g, () => `<div class="gallery">\n${lights.map(lightCard).join("\n")}\n</div>`);
+  body = body.replace(/<light-index><\/light-index>/g, () => `<script type="application/json" id="light-index">${JSON.stringify(lightIndex()).replace(/</g, "\\u003c")}</script>`);
   return { meta, body };
 }
 
@@ -105,7 +124,7 @@ function check(file, html) {
     /href="https:\/\/unpromptedworks\.com\/#about"/,
   ];
   for (const re of need) if (!re.test(html)) throw new Error(`${file}: missing ${re}`);
-  if (/<light |<lights-gallery>/.test(html)) throw new Error(`${file}: unexpanded tag`);
+  if (/<light |<lights-gallery>|<light-index>/.test(html)) throw new Error(`${file}: unexpanded tag`);
 }
 
 rmSync(OUT, { recursive: true, force: true });
