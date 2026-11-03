@@ -147,6 +147,15 @@ p { margin: 0 0 1em; }
 .t-lamps i { width: 0.9rem; height: 0.9rem; border-radius: 50%; background: var(--lamp-w); box-shadow: 0 0 10px 3px color-mix(in srgb, var(--lamp-w) 50%, transparent), 0 0 30px 10px color-mix(in srgb, var(--lamp-w) 18%, transparent); }
 .towers b { color: var(--bright); }
 .towers small { color: var(--dim); font-size: 0.85rem; }
+.t-lamps i.t-rev { animation: t-rev 6s ease-in-out infinite; }
+@keyframes t-rev { 0%, 100% { opacity: 1; } 45%, 55% { opacity: 0.08; } }
+@media (prefers-reduced-motion: reduce) { .t-lamps i.t-rev { animation: none; opacity: 0.55; } }
+@media (max-width: 34rem) {
+  .towers { gap: 1rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; }
+  .rule-table.stack thead { display: none; }
+  .rule-table.stack tr { display: block; border-bottom: 1px solid var(--rule); padding: 0.6rem 0; }
+  .rule-table.stack td { display: block; border: 0; padding: 0.1rem 0; }
+}
 .pair.trio { grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 0 1.6rem; }
 .src-list { padding-left: 1.1rem; }
 .src-list li { margin-bottom: 0.5rem; }
