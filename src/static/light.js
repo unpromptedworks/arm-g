@@ -231,6 +231,11 @@ export function timeline(c) {
     t.step = t.period;
     t.seg = Array.from({ length: n }, () => t.seg.map((s) => ({ ...s }))).flat();
     t.period *= n;
+  } else if (c.alternating && c.timing && c.colors.length > 1) {
+    // Exact timings that repeat once per colour (Al.Oc BuY 3s listed as
+    // 1, 0.5, 1, 0.5) have a rhythm step of the period over the colours.
+    const n = c.colors.length, k = c.timing.length / n;
+    if (Number.isInteger(k) && k % 2 === 0 && c.timing.every((d, j) => d === c.timing[j % k])) t.step = t.period / n;
   }
   t.basePeriod = t.period;
   let i = 0;
