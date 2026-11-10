@@ -45,7 +45,7 @@ function lightCard(l) {
 
 function layout(meta, body, file) {
   const url = SITE + "/" + (file === "index.html" ? "" : file);
-  const nav = [["index.html", "Decoder"], ["grammar.html", "The grammar"], ["cape-cod.html", "Cape Cod"], ["morse.html", "Morse"], ["time.html", "Time a light"], ["notes.html", "Notes and sources"]]
+  const nav = [["index.html", "Decoder"], ["grammar.html", "The grammar"], ["cape-cod.html", "Cape Cod"], ["morse.html", "Morse"], ["wreck.html", "Wrecks"], ["time.html", "Time a light"], ["notes.html", "Notes and sources"]]
     .map(([f, n]) => `<a href="/${f === "index.html" ? "" : f}"${f === file ? ' aria-current="page"' : ""}>${n}</a>`).join("");
   return `<!doctype html>
 <html lang="en">
@@ -88,6 +88,7 @@ ${body}
 const INDEX_LABELS = {
   "cape-cod.html": { "Highland, Truro": "Highland, Cape Cod", "Chatham": "Chatham, Cape Cod", "Nauset, Eastham": "Nauset, Cape Cod", "Race Point": "Race Point, Cape Cod", "Wood End": "Wood End, Cape Cod", "Long Point": "Long Point, Cape Cod" },
   "morse.html": { "Offshore platform, UK waters": "Offshore platform, UK waters", "Its corners": "Offshore platform, red corner lights", "Safe-water mark": "Safe-water mark", "Gabicce Mare, as listed": "Gabicce Mare, Italy" },
+  "wreck.html": { "Emergency wreck mark": "Emergency wreck marking buoy" },
   "grammar.html": { "North": "North cardinal mark", "East": "East cardinal mark", "South": "South cardinal mark", "West": "West cardinal mark", "North, quick": "North cardinal mark, quick", "East, quick": "East cardinal mark, quick", "South, quick": "South cardinal mark, quick", "West, quick": "West cardinal mark, quick" },
 };
 function lightIndex() {
