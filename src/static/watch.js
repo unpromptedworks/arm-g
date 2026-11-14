@@ -136,14 +136,14 @@ function done(r) {
 }
 
 // The shape of a characteristic, for matching: everything but colour and period.
-function shape(c) {
+export function shape(c) {
   const g = c.groups ? c.groups.join("+") : "1";
   return [c.rhythm, c.letter || "", g, c.plusLong ? "L" : ""].join("|");
 }
 
 // A Morse letter of one length is a group flash to a watcher: O (– – –) is
 // three long flashes, S (· · ·) three short ones. Returns that twin's shape.
-function twin(c) {
+export function twin(c) {
   if (c.rhythm !== "Mo" || c.letter.length !== 1) return null;
   const code = MORSE[c.letter];
   if (/^-+$/.test(code)) return ["LFl", "", String(code.length), ""].join("|");
@@ -168,7 +168,8 @@ export function matches(reading, color, index) {
     if (!c.period) periodGap = 0;
     else if (reading.measured) {
       const t = timeline(c);
-      periodGap = Math.abs((t.basePeriod) - reading.measured) / t.basePeriod;
+      const p = t.step || t.basePeriod;
+      periodGap = Math.abs(p - reading.measured) / p;
     } else periodGap = 1;
     out.push({ ...l, colourFits, periodGap, close: periodGap <= 0.12, asTwin: asTwin ? `listed as Morse ${c.letter}` : "" });
   }
