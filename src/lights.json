@@ -124,5 +124,117 @@
         "url": "https://en.wikipedia.org/wiki/Light_characteristic"
       }
     ]
+  },
+  {
+    "id": "highland",
+    "name": "Highland",
+    "place": "North Truro, Cape Cod, Massachusetts, USA",
+    "chars": [
+      "Fl W 5s 52m 18M"
+    ],
+    "note": "Once one steady light on one tower, told from Chatham by its two towers and from Nauset by its three: you counted points of light along the horizon. Its single flash now says the one the tower used to. On the outer arm of the Cape its period is what sets it apart: 5 s, where Race Point, the only other single white flash there, takes 10.",
+    "sources": [
+      {
+        "title": "Highland Light",
+        "url": "https://en.wikipedia.org/wiki/Highland_Light"
+      }
+    ],
+    "gallery": false,
+    "page": "cape-cod.html"
+  },
+  {
+    "id": "chatham",
+    "name": "Chatham",
+    "place": "Chatham, Cape Cod, Massachusetts, USA",
+    "chars": [
+      "Fl(2) W 10s 24m 24M"
+    ],
+    "note": "Lit in 1808 with two towers, where Truro had one. In 1923 the northern tower was taken down and moved about twelve miles north, where it became Nauset Light. The station still says two, now in time: the only group flash on the outer arm of the Cape.",
+    "sources": [
+      {
+        "title": "Chatham Light",
+        "url": "https://en.wikipedia.org/wiki/Chatham_Light"
+      }
+    ],
+    "gallery": false,
+    "page": "cape-cod.html"
+  },
+  {
+    "id": "nauset",
+    "name": "Nauset",
+    "place": "Eastham, Cape Cod, Massachusetts, USA",
+    "chars": [
+      "Al.Fl WR 10s 37m 24/20M"
+    ],
+    "note": "The tower that stood at Chatham until 1923. It flashed three times in white, the count once spelled out by the three towers of the Three Sisters of Nauset, until 1981, when rotating aerobeacons gave it one white flash and one red. The colours are charted to different ranges, so between 20 and 24 miles out the red is gone and it shows one white flash every ten seconds.",
+    "sources": [
+      {
+        "title": "Nauset Light",
+        "url": "https://en.wikipedia.org/wiki/Nauset_Light"
+      },
+      {
+        "title": "Nauset Light",
+        "url": "https://www.nps.gov/places/nauset-light.htm",
+        "by": "National Park Service, public domain"
+      }
+    ],
+    "gallery": false,
+    "page": "cape-cod.html"
+  },
+  {
+    "id": "race-point",
+    "name": "Race Point",
+    "place": "Provincetown, Cape Cod, Massachusetts, USA",
+    "chars": [
+      "Fl W 10s 12m 16M"
+    ],
+    "note": "First lit on 5 November 1816 with one of the earliest revolving lights, which set it apart from Highland's steady one. When it failed to revolve in thick weather, vessels took it for Highland: three in the winter of 1842, the schooner Saluda in 1845. Today it flashes once every ten seconds, Highland every five.",
+    "sources": [
+      {
+        "title": "Race Point Light",
+        "url": "https://en.wikipedia.org/wiki/Race_Point_Light"
+      },
+      {
+        "title": "A false beacon at Race Point Light",
+        "url": "https://lighthousefoundation.org/2018/03/a-false-beacon-at-race-point-light/",
+        "by": "American Lighthouse Foundation"
+      }
+    ],
+    "gallery": false,
+    "page": "cape-cod.html"
+  },
+  {
+    "id": "wood-end",
+    "name": "Wood End",
+    "place": "Provincetown, Cape Cod, Massachusetts, USA",
+    "chars": [
+      "Fl R 10s 14m 13M"
+    ],
+    "note": "Near the tip of the hook, close to Race Point and at the same rhythm: one flash every ten seconds. A stopwatch reads the same at both. Only the colour separates them, red here and white there.",
+    "sources": [
+      {
+        "title": "Wood End Light",
+        "url": "https://en.wikipedia.org/wiki/Wood_End_Light"
+      }
+    ],
+    "gallery": false,
+    "page": "cape-cod.html"
+  },
+  {
+    "id": "long-point",
+    "name": "Long Point",
+    "place": "Provincetown, Cape Cod, Massachusetts, USA",
+    "chars": [
+      "Oc G 4s 11m 8M"
+    ],
+    "note": "At the very end of the hook, and different from its five neighbours in everything: green, short-period, and occulting, the only one of the six lit for longer than it is dark.",
+    "sources": [
+      {
+        "title": "Long Point Light",
+        "url": "https://en.wikipedia.org/wiki/Long_Point_Light"
+      }
+    ],
+    "gallery": false,
+    "page": "cape-cod.html"
   }
 ]

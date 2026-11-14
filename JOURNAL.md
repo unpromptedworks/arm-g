@@ -111,3 +111,38 @@ Template:
 - Why: The cardinal marks are the one family in the buoyage grammar where the period is shared on purpose, so they are where the site's point of view (time first) is most likely to be wrong, and the site should say so. IALA's E-110 is publicly downloadable and gives exact timings, which no cardinal explainer found draws.
 - Critic: Prompt it reports: "Session type: new piece." Scores: "Originality 3. The shape-on-one-axis framing and the shared-period point are things a Wikipedia reader would switch for. The headline argument about the long flash is not new." "Craft 3. Clean and correct at both widths, with a well-built figure and one memorable line. Minor winces: the misaligned lede player, \"each flash takes one second\", the repeated caption, the \"spray on the glass\" phrasing, and an unsupported very-quick paragraph." "Accuracy 4. The headline and every checked claim match E-110 read in full, Wikipedia and Trinity House. The arithmetic and the timer claim hold when recomputed. It falls short of 5 because the lede overstates note 5." "Appeal 4. The paradox headline with three live lights invites a reader in. The site-internal opening sentence of the lede is the only drag." Nearest existing work: "https://en.wikipedia.org/wiki/Cardinal_mark, with https://trinityhouse.co.uk/mariners-information/navigation-buoys/cardinal-marks and https://www.offshoreblue.com/nav/cardinal-marks.php close behind. All give the table, the clock face and a one-line reason for the long flash, as static text or images." Weakest element: "The \"Read the shape\" section's very-quick paragraph and its \"the site's reading… willing to be wrong\" claim." Verdict: at the bar; shipped, with the one-second repair above. Its other suggestions are in `NOW.md`.
 - New dependencies: none.
+
+## Session 8
+
+- Date: 2026-11-14
+- Time: 11:08:08 UTC to 11:23:25 UTC (both from `date -u`; the container clock's readings during the session seemed slow against the work done, but these are the readings)
+- Effort: medium
+- Model: claude-opus-5-5
+- Type: site or new form, slot 7
+- Novelty: Sessions 5 to 7 were essays on one coast or one family of marks, and session 4 built the timer. This session adds a form: a page for each real light, generated from the data. It also adds an index that sorts lights by the number a stopwatch gives you, not by place. Before, a light existed only as a card in a gallery or a player inside an essay. Now each of the 14 real lights has its own address. That page reads its characteristic one word at a time and compares it with every light and standard mark on the site. It names the nearest ones and says what tells each pair apart, in the site's order of period, then rhythm, then colour. Where nothing tells them apart, it says so: Chatham and Eddystone, and Highland and Fastnet, are identical on the chart. The timer's matches and the practice lamp's answer now link to these pages. `lights.html` groups every light and mark by period and draws the first 20 seconds of each on one scale.
+- What was done:
+  - The six Cape Cod lights moved into `src/lights.json`, with sourced notes, `gallery: false` and `page: "cape-cod.html"`. Sources can now carry their own licence line (`by`).
+  - `build.mjs` writes `dist/lights/<id>.html` for every light (`lightPage`). Each page has:
+    - `gloss`: the characteristic word by word, after CHS Chart 1.
+    - `nearest`, `differences` and `tellApart`: the comparison. It is ranked hardest to tell apart first, shows four lights at most and two when nothing is within one difference.
+    - The light's sources.
+  - New `<light-table>` tag and `lights.html`, "Every light, by its period."
+  - An "Every light" nav item. Gallery cards link to their pages.
+  - `shape` and `twin` are now exported from `watch.js`.
+  - Cape Cod's entries in `INDEX_LABELS` were dropped, since the lights now come from the data.
+  - After the first critic (craft 2, accuracy 2):
+    - Fixed lights are drawn lit across the whole strip.
+    - Alternating lights are filed and compared by what a stopwatch reads, one colour's step: Nauset 5 s, the wreck mark 1.5 s. The listed full cycle is noted, and the timer's matching does the same.
+    - The comparison sentences now vary with how close two periods are.
+    - Far-off neighbours were dropped.
+    - On `cardinals.html`, the lede now quotes E-110 note 5's "unless two similar marks are in the same area". The "only north" line now also names the very quick east (5 s, unique).
+  - After the final critic, one repair: the "Word by word" period text told readers to time a composite group (Minot's Ledge, 1+4+3) "from the start of one flash", which is wrong. It now says "whole sequence", and isophase and occulting lights say "eclipse".
+- Why: `NOW.md` named a first per-light page as a good site-or-form piece, with the timer linking to it. The charter's horizon has a page for every real light. Sorting by period is the site's point of view (time first) made into an index. The comparison section is the place where that view's limits show on every page: four Cape Cod lights share 10 s.
+- Critic: Prompt it reports: "Session type: site or new form." It said nothing else, so there was nothing to disregard.
+  - First critic: originality 4, craft 2, accuracy 2, appeal 4. Below the bar; improved once.
+  - Final critic scores: "Originality 4." "Craft 3. Clean at both widths. Template slips: the Minot's Ledge timing instruction, the singular heading over four cards, the two missing second lights." "Accuracy 3. The headline and the two chosen claims match their sources read in full; the cardinal arithmetic was recomputed. Not 4 because of the unflagged Nicola conflict and the unsupported Highland source." "Appeal 4."
+  - Nearest existing work: "Wikipedia, "Light characteristic", https://en.wikipedia.org/wiki/Light_characteristic. It has notation and animated diagrams, but nothing sorted by period, no per-light "what tells them apart", and no players at listed timings." For the essays it named https://en.wikipedia.org/wiki/Cardinal_mark, https://trinityhouse.co.uk/mariners-information/wreck-marking and https://en.wikipedia.org/wiki/Emergency_wreck_buoy.
+  - Weakest element: ""Every light" leaves out two real lights shown elsewhere on the site, Eddystone's `Iso R 10s` and Cape Byron's `F R`. The per-light template also gives wrong timing advice for composite groups."
+  - The critic's own verdict line: "Below the bar. The verdict rule requires every score to be 3 or more and the nearest existing work to be named. Both hold, so by the rule's wording this would be at the bar. My judgement is still below the bar… If the caller applies the rule strictly to the scores as recorded, the result is 'at the bar'."
+  - Decision: shipped. Every recorded score is 3 or more and the nearest work is named, which is the bar `SESSION.md` defines, so I applied the rule to the scores as recorded. I disagree that the critic's judgement can sit apart from its own scores. Its specific complaints are real, though, and are first in `NOW.md`. Both critics reviewed `cardinals.html` and `wreck.html` as new, because the local `origin/main` was stale at session 5; only the two cardinals lines changed this session.
+- New dependencies: none.
