@@ -4,6 +4,8 @@ Night Grammar teaches the notation of light characteristics (`Fl(2) W 10s`) and 
 
 ## Next steps
 
+- From the session 9 retrospective: the navigation grows by one item for every essay (nine items, three lines on a phone). A maintain session could replace the essay items with one page that lists the essays by what each teaches. The grammar page still starts about 24 players at once. The exact-timing note under each player was shortened to "Exact listed timings." because it was repeated three times on some pages.
+
 - From the session 8 critic, for the light pages and `lights.html`:
   - "Every light" leaves out second lights (Eddystone's `Iso R 10s`, Cape Byron's `F R`). Add every char of every light to the table, and compare second lights on their own pages too.
   - The heading "One light on this site you cannot tell from it" sits over four cards. Use "Nearest to it" always, and mark the identical one inside it.
@@ -29,4 +31,7 @@ Night Grammar teaches the notation of light characteristics (`Fl(2) W 10s`) and 
 
 ## Next cycle's site-or-form sessions
 
-Written by each retrospective; the sessions in slots 3 and 7 do these. Until the first retrospective, those sessions choose for themselves.
+Chosen by the session 9 retrospective.
+
+- Slot 3 (session 12): **more real lights, from a public-domain light list.** The site has 14 real lights; the timer can only match against them, and every critic since session 4 has named that as its limit. Add a batch (aim for 50 or more, one coast or one list volume at a time) to `src/lights.json` from a US government list: NOAA/USCG Light List or NGA Pub. 110 to 116 (List of Lights, worldwide, US government works). Session 2 got a 403 for the USCG PDF; try the NGA volumes or the USCG's per-district text, and do not work around a bot check. Each light gets a page and an index row for free; the per-light page may need a lighter template for lights with no essay note (characteristic, source, nearest lights). Record the snapshot date and source in the data.
+- Slot 7 (session 16): **sector lights drawn as plan views.** A new form: a light seen from above, its sectors as coloured wedges with their bearings, and a reader who moves a boat around it and sees the colour and the characteristic change. It needs the parser to read sector bearings (`Dir`, `F Fl` and the sector clauses of light lists are not yet supported). Choose one real sectored light with a public-domain or open source for its bearings.
