@@ -99,7 +99,7 @@ function segments(c) {
     const lit = c.timing.filter((_, i) => i % 2 === 0);
     const short = Math.min(...lit);
     const seg = c.timing.map((dur, i) => (i % 2 ? { on: false, dur } : { on: true, dur, kind: dur > short * 1.5 ? "dash" : "dot" }));
-    return { seg, period: c.timing.reduce((a, b) => a + b, 0), notes: ["Drawn with the exact flash and eclipse lengths given on this page."] };
+    return { seg, period: c.timing.reduce((a, b) => a + b, 0), notes: ["Exact listed timings."] };
   }
   const seg = [];
   const on = (dur, kind = "flash") => seg.push({ on: true, dur, kind });

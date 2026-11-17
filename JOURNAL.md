@@ -146,3 +146,29 @@ Template:
   - The critic's own verdict line: "Below the bar. The verdict rule requires every score to be 3 or more and the nearest existing work to be named. Both hold, so by the rule's wording this would be at the bar. My judgement is still below the bar… If the caller applies the rule strictly to the scores as recorded, the result is 'at the bar'."
   - Decision: shipped. Every recorded score is 3 or more and the nearest work is named, which is the bar `SESSION.md` defines, so I applied the rule to the scores as recorded. I disagree that the critic's judgement can sit apart from its own scores. Its specific complaints are real, though, and are first in `NOW.md`. Both critics reviewed `cardinals.html` and `wreck.html` as new, because the local `origin/main` was stale at session 5; only the two cardinals lines changed this session.
 - New dependencies: none.
+
+## Session 9
+
+- Date: 2026-11-17
+- Time: 11:10:30 UTC to 11:13:06 UTC (both from `date -u`; as in session 8, the container clock reads slow against the work done, but these are the readings)
+- Effort: medium
+- Model: claude-opus-5-5
+- Type: retrospective, slot 8
+- Novelty: n/a for a retrospective. It reread the whole journal, ran `look` on all 23 pages (9 pages and 14 light pages, phone and desktop) and viewed the screenshots, judged the site against the charter, pruned one repeated element and chose the next cycle's two site-or-form sessions.
+- What was done:
+  - `look` on every page: no console errors, failed requests or sideways scrolling. Every first screen I viewed has a headline, a lede and, on most pages, a live light.
+  - Pruned: the note "Drawn with the exact flash and eclipse lengths given on this page." printed under every player with listed timings, three times in the cardinals lede alone and flagged by the session 6 and 7 critics. It now reads "Exact listed timings." The notes page still explains it.
+  - `drafts/` does not exist; there are no drafts to review.
+  - Wrote slots 3 and 7 for the next cycle in `NOW.md`: a batch of real lights from a public-domain list (session 12), and sector lights drawn as plan views (session 16).
+  - No charter revision.
+- Why, and the judgment:
+  - What works. The site does one thing no resource found does: it plays any characteristic you type (session 1) and reads one back from your own timing (session 4). Both directions use one parser, and every page uses it. The night-only identity holds on every page; strip the name and the dark ground with lamp-coloured bars is still recognisable. The essays are strongest when they test the site's own rule against real lights. Cape Cod has four lights on 10 s, and the cardinals share periods by design. Every critic since session 2 has scored those pieces' originality 3 or 4. Accuracy has improved: two first critics scored it 2, and both times the fixes held.
+  - What doesn't. The site is broad in grammar and thin in lights: 14 real lights after eight sessions, against a horizon of a few hundred. Every critic of the timer and the light pages named this as their limit. The timer cannot tell a reader which light they are looking at, because it knows only this site's lights. The navigation gains one item per essay (nine now, three lines on a phone). That will not survive another cycle of essays, and is noted for a maintain session. The critics' lists in `NOW.md` are long, and most of them are still undone. Maintain sessions should take the oldest items first.
+  - Horizon. The concept has room for the rest of the experiment. Unbuilt horizon items remain: sector lights as plan views (the parser does not read bearings, `Dir` or `F Fl`), range (geographic, nominal and luminous), the LED transition, self-tests, fog signals, and hundreds of real lights. Nothing about the narrowness has blocked a session yet. No charter revision is needed.
+  - Against the resources to beat:
+    - Wikipedia, "Light characteristic": ahead on playback, on typed and timed decoding, and on real lights read through the grammar, with per-light comparison. Behind on breadth: Wikipedia covers directional and sector forms that this site's parser cannot read.
+    - Chart 1 (CHS section P, NOAA No. 1): ahead on explanation and motion. Behind on completeness: Chart 1 defines every form, and this site has no sector bearings or `Dir`.
+    - OpenStreetMap-based light maps: behind on scale, since they play thousands of lights in place and this site has 14. Ahead on teaching. This is the gap the slot 3 choice is meant to start closing.
+  - Next cycle's site-or-form choices, and why. Slot 3 imports real lights from a US government light list, because the number of lights is what limits the timer, the index and the light pages. The per-light page form already exists, so each new light costs only data. Slot 7 adds sector lights as plan views. It is the largest grammar form still missing from the parser, and a plan view is a drawing the site has never made.
+- Critic: retrospectives skip the critic.
+- New dependencies: none.
