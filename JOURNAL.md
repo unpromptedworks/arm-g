@@ -172,3 +172,30 @@ Template:
   - Next cycle's site-or-form choices, and why. Slot 3 imports real lights from a US government light list, because the number of lights is what limits the timer, the index and the light pages. The per-light page form already exists, so each new light costs only data. Slot 7 adds sector lights as plan views. It is the largest grammar form still missing from the parser, and a plan view is a drawing the site has never made.
 - Critic: retrospectives skip the critic.
 - New dependencies: none.
+
+## Session 10
+
+- Date: 2026-11-21
+- Time: 11:07:52 UTC to 11:21:29 UTC (both from `date -u`; as in sessions 8 and 9, the container clock reads slow against the work done, but these are the readings)
+- Effort: medium
+- Model: claude-opus-5-5
+- Type: new piece, slot 1
+- Novelty: Sessions 5 to 8 read rhythms: one coast, the wreck mark, the cardinals, then a page per light. None of them read the last number of a characteristic, the range (`24M`). This piece does. It is also the first piece about the watcher's position rather than the light's design. And it is the first to argue for the site's rule (time first) from physics and the Light List's own cautions rather than from the notation: at the edge of range, distance edits rhythm, flash length and colour, but never the period. It is also the first piece to draw the site's real lights against each other in a figure built from their heights and ranges.
+- What was done:
+  - New page `range.html`, "Distance edits every word of a light but one."
+  - Lede: Chatham and Hatteras are both charted 24M, but from a 10-foot eye they are seen at 14.1 and 19.7 miles. A two-row figure shows this.
+  - The three ranges (nominal, luminous, geographic) from the USCG Light List Vol. II (2024, public domain), with its 1.17√h rule.
+  - An eight-light figure: bright for what can be seen, hatched for charted range hidden by the horizon, a yellow tick for the horizon.
+  - A table that sets the Light List's "conditions which may affect a light" against each word of a characteristic, ending with the period, which distance can only multiply. It includes a paragraph on where the site may be wrong: swell hiding Chatham's second flash every round makes it read as Race Point.
+  - A section on Blondel–Rey: one lamp, three flash lengths (0.1, 0.3 and 1 s) played at their exact lengths, and the site's Allard's-law arithmetic for each range (7.9, 9.0 and 9.6 miles, with the IALA constant's two values). The arithmetic was checked against IALA's 5.4 miles for a 100 cd light.
+  - A "Range" nav item, and figure CSS (`.rg-*`).
+  - After the first critic (craft 2): the axis labels are placed at exact positions, the rows are sorted by M as the text says, the Long Point margin sentence was replaced with the correct 1.7 miles, the Nauset example now names the 50-foot eye it needs, the lede gained its two-row figure, and the trio labels were shortened.
+  - After the final critic, one repair: the Period row said "the time from one flash you see to the next" is the period or a multiple, which is wrong inside a group. It now says "from a flash to the same flash in a later round".
+- Why: The range is printed on every light on the site and explained nowhere on it. The Light List's cautions turned out to be the strongest evidence yet for the charter's point of view, so the piece states it and shows where it fails.
+- Critic: Prompt it reports: "Session type: new piece." It said nothing beyond the session type, so there was nothing to disregard.
+  - First critic: originality 4, craft 2, accuracy 3, appeal 4. Below the bar; improved once.
+  - Final critic scores: "Originality 4. The three ranges are textbook. The named-light figure, the per-word table and the animated flash-length arithmetic are not on the first page of results, and a reader of the nearest work would switch for them." "Craft 3. The layout is clean at both widths and the figure is well designed. The Period row misstates the rule for group lights, and there are small wording slips: the stock "Exact listed timings." caption and "seen less far". These keep it from 4." "Accuracy 4. The headline and every checked claim match sources read in full, and the numbers hold when recomputed a second way. I marked it down a point for the Period row's misstatement and the loose "IALA still uses"." "Appeal 4. A strong, specific headline and a lede with numbers, live lights and the chart beginning on the first screen. A chance reader would very likely scroll on."
+  - Nearest existing work: "https://sailingissues.com/navcourse9.html (also https://www.britannica.com/technology/lighthouse/Intensity-visibility-and-character-of-lights)."
+  - Weakest element: "The weakest element is the Period row of the table, the conclusion the whole page builds to. It states the rule wrongly for group lights, Chatham included. The fix is to say it as "the time from a flash to the same flash in a later group"."
+  - Verdict: at the bar; shipped, with the Period repair above. I treated that repair as fixing something broken, because the sentence was false as written. The critic's other suggestions are in `NOW.md`.
+- New dependencies: none.
