@@ -1,0 +1,104 @@
+<!--{"title":"Lenses: when a flash was a beam going past","description":"Before a lamp could be switched, a flash was a beam from a turning lens. Build a revolving lens and see the characteristic it writes: why the count was cut in glass, the period set by gears, and the flash length by both. With Eddystone and Bishop Rock as they were in 1911.","script":"lens.js"}-->
+<section class="lede">
+  <h1>A flash used to be a beam going past.</h1>
+  <p>For most of the history of flashing lights, a lighthouse flame could not be switched off and on. It burned steadily inside a cage of glass, and the cage turned. Each bull's-eye panel gathered the flame into a narrow beam, and a flash was that beam sweeping across you. In 1911 the Eddystone's lens turned once in three minutes and showed two flashes every half minute, <code>Fl(2) 30s</code> in today's notation. Every word of that came from the machine.</p>
+</section>
+
+<div class="lens-lab" id="lens-lab">
+  <svg viewBox="-125 -125 250 262" role="img" aria-label="A revolving lens seen from above. Each panel throws a narrow beam; the watcher sits below the lens and sees a flash each time a beam crosses them.">
+    <circle r="122" class="ln-sea"/>
+    <circle r="34" class="ln-ring"/>
+    <g class="ln-rot"></g>
+    <circle r="9" class="ln-glow"/>
+    <path d="M-7 128 L7 128 L0 117 Z" class="ln-you"/>
+    <text x="12" y="129" class="ln-t">you</text>
+  </svg>
+  <div class="ln-ctl">
+    <p class="ln-presets"><span>As built:</span>
+      <button class="chip" type="button" data-preset="6 2 180 3" aria-pressed="true">Eddystone, 1911</button>
+      <button class="chip" type="button" data-preset="5 2 300 4.8" aria-pressed="false">Bishop Rock, 1911</button>
+      <button class="chip" type="button" data-preset="2 4 60 2.4" aria-pressed="false">Isle of May, 1911</button>
+      <button class="chip" type="button" data-preset="6 1 360 3" aria-pressed="false">Tory Island's lens, 1911</button>
+    </p>
+    <label>Groups of panels around the lens <b data-show="groups">6</b><input type="range" name="groups" min="1" max="6" step="1" value="6"></label>
+    <label>Panels in each group <b data-show="panels">2</b><input type="range" name="panels" min="1" max="4" step="1" value="2"></label>
+    <label>Seconds to turn once <b data-show="turn">180</b><input type="range" name="turn" min="15" max="360" step="5" value="180"></label>
+    <label>Width of each beam, degrees <b data-show="beam">3</b><input type="range" name="beam" min="1" max="6" step="0.2" value="3"></label>
+    <p class="ln-msg" hidden></p>
+    <p class="ln-sums">Flashes in a group: <b>2</b>, one for each panel. Period: 180 s ÷ 6 groups = <b>30 s</b>. Flash: 180 s × 3° ÷ 360° = <b>1.5 s</b>.</p>
+  </div>
+  <div class="pair solo">
+    <light char="Fl(2) W 30s" id="lens-out" label="What this lens writes" timing="1.5 2.25 1.5 24.75"></light>
+  </div>
+</div>
+
+<h2>Three words, three parts of the machine</h2>
+<div class="prose">
+  <p>Read a revolving light's characteristic as a description of its lens and each word has an address.</p>
+  <p><b>The count is in the glass.</b> One flash is one panel. Two flashes in a group are two panels set close together, with a wider blank space before the next pair. The 1911 <i>Encyclopædia Britannica</i> credits Dr John Hopkinson with the idea in 1874: divide the lens panels of a revolving light and set them "at an angle to produce the group-flashing characteristic". The first were Tampico, in Mexico, and the Little Basses, off Ceylon, both double flashing; the Casquets' triple flash followed in 1877. To change the count you had to rebuild the lens, or, as the next section but one shows, cut the flame.</p>
+  <p><b>The period is in the gears.</b> The lens turns once and every group passes you once, so the period is the time to turn once divided by the number of groups. Eddystone: 180 seconds over a 30-second period means six pairs of panels, twelve in all. The article gives no such formula. It is the site's arithmetic, and it fits every light in the table below. The lens was turned "by clockwork mechanism actuated by weights", so the period was the one word set by clockwork.</p>
+  <p><b>The flash length is in both.</b> A beam a few degrees wide takes a few degrees of turning to cross you. Flash length is the time to turn once, times the beam's width, over 360 degrees. The beam's width came from the size of the flame and the lens's focal length, and the speed came from the gears, so the flash was the one word nobody chose directly. A big, slow lens wrote long flashes whether anyone wanted them or not.</p>
+</div>
+
+<h2>Four lenses, as the 1911 article lists them</h2>
+<div class="prose">
+  <p>The article's tables give a period and a flash length for each light, and its text gives the time to turn once for a few. Where it gives both, the beam width falls out of the arithmetic, and it comes out at a few degrees every time.</p>
+</div>
+<div class="table-wrap">
+<table class="rule-table stack ln-table">
+  <thead><tr><th>Light, 1911</th><th>Turns once in</th><th>Writes</th><th>Groups</th><th>Flash</th><th>Beam, worked out</th></tr></thead>
+  <tbody>
+    <tr><td data-label="Light, 1911">Eddystone</td><td data-label="Turns once in">3 min</td><td data-label="Writes"><code>Fl(2) 30s</code></td><td data-label="Groups">6</td><td data-label="Flash">1.5 s</td><td data-label="Beam, worked out">3.0°</td></tr>
+    <tr><td data-label="Light, 1911">Bishop Rock</td><td data-label="Turns once in">5 min</td><td data-label="Writes"><code>Fl(2) 60s</code></td><td data-label="Groups">5</td><td data-label="Flash">4.0 s</td><td data-label="Beam, worked out">4.8°</td></tr>
+    <tr><td data-label="Light, 1911">Isle of May</td><td data-label="Turns once in">1 min</td><td data-label="Writes"><code>Fl(4) 30s</code></td><td data-label="Groups">2</td><td data-label="Flash">0.4 s</td><td data-label="Beam, worked out">2.4°</td></tr>
+    <tr><td data-label="Light, 1911">Tory Island</td><td data-label="Turns once in">6 min</td><td data-label="Writes"><code>Fl(3) 60s</code>, from a lens that wrote one flash</td><td data-label="Groups">6</td><td data-label="Flash">3.0 s, before the burner cut it</td><td data-label="Beam, worked out">3.0°</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="prose">
+  <p class="aside">Turning times, group counts, periods and flash lengths as printed in the article's text and tables VI and VII, written here in today's notation. Groups are the time to turn once over the period; beam width is 360° times the flash over the time to turn once. Both columns are the site's arithmetic. The Isle of May's turning part was a cage of prisms around a fixed lens, splitting the light "into 8 separate beams of 3° in azimuth": eight beams in two groups of four, as the arithmetic says. Working back from its 0.4-second flash gives 2.4°, close to the article's 3° but not the same, which is as near as a model of sharp-edged beams can come. The article does not give the dark between flashes inside a group; the lens above sets its panels two and a half beam-widths apart, a choice of this site.</p>
+  <p>Bishop Rock's flashes were four seconds long and Tory Island's three. Today's grammar calls any flash of two seconds or more a long flash, so by the rules a reader learns on <a href="/grammar.html">the grammar page</a>, Bishop Rock in 1911 was <code>LFl(2) 60s</code>. Nobody designed a long flash there. A five-minute lens with a beam about five degrees wide can't help writing one.</p>
+</div>
+
+<h2>To go faster, float the lens</h2>
+<div class="prose">
+  <p>A short flash needs a fast lens, and a lens of several tons does not turn fast. The answer was to float it. In the mercury float, which the article calls "the invention of Bourdelles", the lens rides on a trough of mercury, and "say 2 cwt" of mercury floats "a mass of over 3 tons". With almost no friction a heavy lens could turn in seconds, not minutes, and the French built <i>feux-éclairs</i>, lightning lights, which "had usually a flash of 1/10th to 1/3rd of a second duration", at intervals of 2½ to 7 seconds.</p>
+  <p>The article's tables show what that bought: the Lizard, one flash of 0.13 seconds every 3 seconds; Roker Pier, 0.1 seconds every 5. Set the lens above to turn in 15 seconds with one panel and a 3° beam, and it writes a flash of about an eighth of a second. Then the French found the floor. After trials in 1903 and 1904, "3/10 second has been adopted by the French authorities as the minimum duration for white flashing lights". That floor is the same cost <a href="/range.html#blondel">the range page</a> works out: a flash too short is seen less far than the same lamp held longer.</p>
+</div>
+<div class="pair">
+  <light char="Fl W 30s" label="A slow lens: 3° beam, one turn in 3 min" timing="1.5 28.5"></light>
+  <light char="Fl W 3s" label="The Lizard, 1911: 0.13 s every 3 s" timing="0.13 2.87"></light>
+</div>
+
+<h2>What a turning lens can't say</h2>
+<div class="prose">
+  <p>Some words in the grammar came from other machines, and you can hear it in their names.</p>
+  <p><b>A count cut in the flame.</b> Tory Island, last row of the table, is the exception to "the count is in the glass". Its lens wrote one flash every minute; the article's table says "the single flash from lens is divided by eclipsing burner into 3 flashes". The burner burned coal gas, and Wigham's method was to lower and raise the flame while the beam crossed you. Set the lens above to Tory Island's and you get the single long flash it started from. J. R. Wigham of Dublin proposed this group flashing for gas lights, and at Galley Head, in Ireland, it gave "a group of short flashes varying in number between six and seven". That is the article's own record of a count that wavered, and the objection to the method was "uncertainty … in the number of flashes". By 1907 Galley Head had a new apparatus "showing five flashes every 20 seconds". A count cut in glass couldn't waver; a count cut in a flame could.</p>
+  <p><b>Occulting</b> means hidden. A lens can't hide a light from everyone at once, so an occulting light covered its flame. The article describes "a cylindrical screen, fitting over the burner, rapidly lowered and raised by means of a cam-wheel at stated intervals", and, for gas, "raising and lowering the gas at stated intervals". For gas buoys, "an automatic occulter was perfected" in 1883, worked by the gas itself on its way to the burner. The light was on for most of the period, because the eclipse was the thing the cam made.</p>
+  <p><b>Fixed and flashing</b>, <code>F Fl</code>, was a fixed lens with flashing panels turning around it. The article calls it "not to be recommended" and gives the reason: the fixed light, being weaker, carries less far, and at a distance you see the flashes alone. The fault was in the machine, and the name stayed in the notation after the machines went.</p>
+  <p>Everything after the switchable lamp needed no lens to turn. A lamp switched by a circuit can flash a Morse letter, hold a flash for exactly the length a rule asks, or change its period overnight. The words stayed the same; the machine under them went away.</p>
+</div>
+
+<h2>The count lasted; the clock did not</h2>
+<div class="prose">
+  <p>Two of the four lights in the table are on this site as they are charted today. Both still flash in twos. Both now repeat far faster.</p>
+</div>
+<div class="pair">
+  <light char="Fl(2) W 30s" label="Eddystone, 1911" timing="1.5 2.25 1.5 24.75"></light>
+  <light char="Fl(2) W 10s 41m 17M" label="Eddystone, today"></light>
+  <light char="LFl(2) W 60s" label="Bishop Rock, 1911" timing="4 6 4 46"></light>
+  <light char="Fl(2) W 15s 44m 20M" label="Bishop Rock, today"></light>
+</div>
+<div class="prose">
+  <p>Eddystone's period is a third of what it was, Bishop Rock's a quarter; the site does not know when each changed or why, and doesn't guess. What it does show is an awkward fact for the site's own rule. This site says time a light first, because the period is the word a watcher can measure best and the one distance never edits (<a href="/range.html">Range</a>). Across a century, though, the period was the word that changed and the count was the word that stayed. The count was cut in glass; the period was only gearing.</p>
+  <p>The 1911 article goes further against the site. A characteristic, it says, should be one a mariner can read "without the necessity of accurately timing the period or duration of flashes". The engineers who built these lenses designed them to be counted. The site still says time first, for a different reason: it is about reading one light tonight, at the edge of its range, where flashes go missing and counts go wrong, and not about which word a lighthouse authority will keep. Both can be true. If you are comparing a light with an old chart, trust the count. If you are looking at it now, time it.</p>
+</div>
+
+<h2>Sources</h2>
+<div class="prose">
+  <ul class="aside src-list">
+    <li>Every quotation on this page, Tory Island's eclipsing burner, Wigham's gas group flashing at Galley Head, Hopkinson's group flashing of 1874, the first group-flashing lights at Tampico and the Little Basses, the Casquets' triple flash of 1877, the weight-driven clockwork, Eddystone's lens turning once in three minutes, Bishop Rock's five minutes, Isle of May's one, Tory Island's six, the periods and flash lengths in tables VI and VII, the mercury float, the <i>feux-éclairs</i>, the French minimum of 0.3 s, the occulting screen and gas occulter, and fixed and flashing lights: W. T. Douglass and N. G. Gedye, <a href="https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Lighthouse">"Lighthouse"</a>, <i>Encyclopædia Britannica</i>, 11th edition (1911), vol. 16, public domain, transcribed on Wikisource. The article writes its lights in the words of its time ("2 flashes … every half minute"); the notation on this page is the site's rendering of them.</li>
+    <li>The formulas for period and flash length, the worked-out beam widths and group counts, and the lens drawn above are the site's arithmetic and the site's model: a turning lens of identical panels with no frame or gap, each throwing a beam of even width. Real lenses blurred the edges of a flash; the player draws them sharp.</li>
+    <li>Eddystone and Bishop Rock today: <a href="/lights/eddystone.html">Eddystone</a> and <a href="/lights/bishop-rock.html">Bishop Rock</a> on this site, from each lighthouse's Wikipedia article (CC BY-SA 4.0). The long-flash threshold of two seconds: the Canadian Hydrographic Service's <a href="https://cartes.gc.ca/publications/chart1-carte1/sections/p-lights/lightcharacters-eng.html">Chart 1, section P</a>.</li>
+  </ul>
+</div>

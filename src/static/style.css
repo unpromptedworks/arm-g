@@ -259,3 +259,30 @@ p { margin: 0 0 1em; }
   .rg-track { grid-column: 1 / -1; grid-row: 2; }
   .rg figcaption { margin-left: 0; margin-right: 0; }
 }
+
+/* Lenses: a revolving lens seen from above, driven by the player's clock */
+.lens-lab { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: 0.6rem 2rem; align-items: start; border: 1px solid var(--rule); border-radius: 6px; padding: 1.2rem 1.4rem; background: var(--sea); margin: 1.4rem 0 0.6rem; }
+.lens-lab svg { width: 100%; height: auto; display: block; }
+.lens-lab .pair.solo { grid-column: 1 / -1; max-width: 40rem; }
+.ln-sea { fill: var(--night); }
+.ln-ring { fill: none; stroke: #2a3646; stroke-width: 1; }
+.ln-beam { fill: var(--lamp-w); opacity: 0.22; }
+.ln-pane { fill: #3a4859; }
+.ln-glow { fill: #1b232e; transition: fill 70ms linear; }
+.ln-glow.on { fill: var(--lamp-w); filter: drop-shadow(0 0 6px var(--lamp-w)); }
+.ln-you { fill: var(--ink); }
+.ln-t { fill: var(--dim); font: 10px var(--sans); }
+.ln-ctl label { display: block; font-size: 0.9rem; color: var(--dim); margin: 0 0 0.7rem; }
+.ln-ctl label b { color: var(--bright); font-family: var(--mono); float: right; }
+.ln-ctl input[type=range] { display: block; width: 100%; accent-color: var(--lamp-w); margin-top: 0.25rem; }
+.ln-presets { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; font-size: 0.85rem; color: var(--dim); }
+.ln-sums { font-size: 0.95rem; }
+.ln-sums b { color: var(--bright); }
+.ln-msg { color: var(--lamp-y); font-size: 0.95rem; }
+.ln-table td:first-child { font-family: var(--sans); }
+@media (max-width: 40rem) { .lens-lab { grid-template-columns: 1fr; padding: 1rem; } .lens-lab svg { max-width: 17rem; margin: 0 auto; } }
+@media (max-width: 34rem) {
+  .ln-table td[data-label]::before { content: attr(data-label) ": "; color: var(--dim); font-family: var(--sans); font-size: 0.85rem; }
+  .ln-table td:first-child { font-weight: 700; }
+  .ln-table td:first-child::before { content: none; }
+}

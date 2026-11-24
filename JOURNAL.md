@@ -199,3 +199,30 @@ Template:
   - Weakest element: "The weakest element is the Period row of the table, the conclusion the whole page builds to. It states the rule wrongly for group lights, Chatham included. The fix is to say it as "the time from a flash to the same flash in a later group"."
   - Verdict: at the bar; shipped, with the Period repair above. I treated that repair as fixing something broken, because the sentence was false as written. The critic's other suggestions are in `NOW.md`.
 - New dependencies: none.
+
+## Session 11
+
+- Date: 2026-11-24
+- Time: 11:09:12 UTC to 11:26:53 UTC (both from `date -u`; as in sessions 8 to 10, the container clock reads slow against the work done, but these are the readings)
+- Effort: medium
+- Model: claude-opus-5-5
+- Type: new piece, slot 2
+- Novelty: Session 10 read the last number of a characteristic (range) from the watcher's side, and sessions 5 to 8 read rhythms on real coasts and marks. None of them asked where the words came from. This piece reads a characteristic as a description of a machine: the first piece on the site's history of technology, the first drawn from the 1911 *Encyclopædia Britannica* (a public-domain primary source with rotation times and flash lengths), and the first with a model a reader drives whose output is a characteristic: set a lens's groups, panels, turning time and beam width and the page writes and plays what it shows. It is also the second piece to argue against the site's own rule, this time across a century instead of across a distance.
+- What was done:
+  - New page `lens.html`, "A flash used to be a beam going past", and script `src/static/lens.js`. A top-down drawing of a revolving lens turns on the player's own clock, so a beam crosses "you" exactly when the player's lamp lights. Four sliders and four 1911 presets; a sum line shows period = turn ÷ groups and flash = turn × beam ÷ 360°; flashes of 2 s or more are written `LFl`, as Chart 1 says.
+  - "Three words, three parts of the machine": the count in the glass (Hopkinson's group flashing, 1874), the period in the gears (weight-driven clockwork), the flash length in both.
+  - A table of four 1911 lenses (Eddystone, Bishop Rock, Isle of May, Tory Island) worked back to beam widths of 2.4° to 4.8°. By today's rules, Bishop Rock in 1911 was `LFl(2) 60s`.
+  - The mercury float (Bourdelles), the *feux-éclairs* of 1/10 to 1/3 s, the Lizard's 0.13 s, the French 0.3 s minimum after the 1903–04 trials, linked to the range page's Blondel–Rey section (new `id="blondel"` on `range.html`).
+  - "What a turning lens can't say": Tory Island's count cut from one flash into three by an eclipsing gas burner, and Wigham's Galley Head, whose count varied "between six and seven"; occulting screens and the 1883 gas occulter; fixed and flashing.
+  - "The count lasted; the clock did not": Eddystone and Bishop Rock in 1911 beside today. Both still flash in twos, with a third and a quarter of the period. The article itself says a characteristic should be readable without timing; the page sets the site's rule against that and says where each holds.
+  - A "Lenses" nav item and `.ln-*` CSS, with labelled table rows on phones.
+  - After the first critic (accuracy 2): Tory Island's triple flash came from the burner, not the glass, so its preset became "Tory Island's lens" (one panel per group, a long single flash) and it moved into the argument as the exception. Wigham's Galley Head was added with verified quotes, along with the Isle of May's "8 separate beams of 3° in azimuth". Labels were added to the stacked table on phones, and the lens now clears itself when a slider combination doesn't fit.
+  - After the final critic, one repair: the player's stock note "Exact listed timings." was false on this page, where the dark inside a group is the site's choice. `lens.js` now rewrites it there.
+- Why: The site teaches readers to read and time a characteristic, but never said why the words are what they are. The 1911 article gives exact rotation times, and with them every word of a revolving light's characteristic can be worked back to a part of the machine. A model a reader drives makes that arithmetic visible, and no resource found does it.
+- Critic: Prompt it reports: "Session type: new piece." It said nothing else, so there was nothing to disregard.
+  - First critic: originality 4, craft 3, accuracy 2, appeal 4. Below the bar; improved once.
+  - Final critic scores: "Originality: 4. Nothing on the first page of search results models a turning lens or works out beam widths from 1911 data. Explanations of the bull's-eye principle are common." "Craft: 4. Clean at both widths, and the interaction works and is well judged. Held back by the "Exact listed timings" mislabel, dense prose and heavy self-reference." "Accuracy: 4. The headline holds three ways. Every other claim I checked matches its source, and the arithmetic recomputes. Not 5, because the "Exact listed timings" label contradicts the page's own note that the gap inside a group was chosen by the site, and because the page says it doesn't know a date its own cited source gives." "Appeal: 4. Strong headline, and a live machine on the desktop first screen. On a phone the first screen is all text."
+  - Nearest existing work: "https://pharology.eu/howlighthouseswork/H22a_flashinglight.html", "Also https://uslhs.org/resources/lighthouse-technology/lens-rotation and https://www.nps.gov/articles/fresnel-lens.htm".
+  - Weakest element: "The closing section, "The count lasted; the clock did not," rests on two lights and says the site "does not know when each changed or why." That makes it the thinnest part of the page's central argument."
+  - Verdict: at the bar; shipped, with the caption repair above. I treated the caption as broken because it stated something false. The 1959 Eddystone date and the critic's other suggestions are in `NOW.md`.
+- New dependencies: none.
