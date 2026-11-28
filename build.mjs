@@ -9,6 +9,23 @@ import { shape, twin } from "./src/static/watch.js";
 const SITE = "https://night-grammar.unpromptedworks.com";
 const OUT = "dist";
 const lights = JSON.parse(readFileSync("src/lights.json", "utf8"));
+// A dated snapshot of lighthouses from the US Coast Guard Light List (public
+// domain), made by tools/light-list-select.mjs. A light already on the site
+// keeps its own entry and gains the list's record; the rest become new lights.
+const LL = JSON.parse(readFileSync("src/light-list.json", "utf8"));
+const LL_DATE = new Date(LL.date + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+const LL_SOURCE = { title: `Light List, Volume I, weekly edition of ${LL_DATE}`, url: LL.url, by: "US Coast Guard, public domain" };
+const N_WORD = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+function listedNote(r) {
+  const what = r.structure ? r.structure.replace(/^On /, "").replace(/\.$/, "") : "A light";
+  const sector = (r.remarks.match(/(?:Red from|Obscured|Within 3 miles|Light partially)[^.]*\./) || [""])[0];
+  return `${what.replace(/^./, (x) => x.toUpperCase())}, ${r.feet} feet above the water, number ${r.llnr} in the Coast Guard's Light List.${sector ? ` The list adds: "${sector}"` : ""}`;
+}
+for (const r of LL.lights) {
+  const have = lights.find((l) => l.id === r.id);
+  if (have) { have.listed = r; continue; }
+  lights.push({ id: r.id, name: r.name, place: `${r.state}, USA`, chars: [r.char], note: listedNote(r), sources: [LL_SOURCE], gallery: false, listed: r, fromList: true });
+}
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -233,12 +250,14 @@ ${gloss(ch).map(([t, g]) => `<tr><td>${esc(t)}</td><td>${esc(g)}</td></tr>`).joi
 ${lightFigure(r.x.char, { label: r.x.label })}
 <p class="apart"><strong>What tells them apart:</strong> ${tellApart(features(l.chars[0]), r.f, r.d)} <a href="${esc(r.x.href)}">${r.x.href.startsWith("/lights/") ? "Its page" : "Where it is on the site"}</a>.</p>
 </div>`).join("\n");
-  const home = l.page ? `<a href="/${l.page}">${l.page === "cape-cod.html" ? "Cape Cod, read in order" : l.page}</a>, where it is read beside its neighbours` : `<a href="/#${l.id}">the decoder's gallery</a>`;
+  const listedHtml = l.listed ? listedSection(l) : "";
+  const home = l.fromList ? `<a href="/lights.html#coast">the coast from Maine to New Jersey, in order</a>` : l.page ? `<a href="/${l.page}">${l.page === "cape-cod.html" ? "Cape Cod, read in order" : l.page}</a>, where it is read beside its neighbours` : `<a href="/#${l.id}">the decoder's gallery</a>`;
   const body = `<section class="lede light-lede">
   <p class="kicker"><a href="/lights.html">Every light</a> · ${esc(l.place)}</p>
   <h1>${esc(l.name)}</h1>
   ${figs}
   <p>${esc(l.note)}</p>
+  ${l.fromList ? l._twin : ""}
 </section>
 <h2>Word by word</h2>
 <div class="prose">
@@ -249,13 +268,74 @@ ${words}
 <div class="near-list">
 ${near}
 </div>
+${listedHtml}
 <h2>Sources</h2>
-<div class="prose"><p class="aside">Characteristic and history: ${sourceList(l.sources)}. Read on this site in ${home}. The definitions in "Word by word" follow the Canadian Hydrographic Service's <a href="https://cartes.gc.ca/publications/chart1-carte1/sections/p-lights/lightcharacters-eng.html">Chart 1, section P</a>, as <a href="/grammar.html">the grammar page</a> does. Not for navigation: use the official light list.</p></div>`;
+<div class="prose"><p class="aside">${l.fromList ? "Characteristic, height, range, structure and remarks" : "Characteristic and history"}: ${sourceList(l.sources)}. Read on this site in ${home}. The definitions in "Word by word" follow the Canadian Hydrographic Service's <a href="https://cartes.gc.ca/publications/chart1-carte1/sections/p-lights/lightcharacters-eng.html">Chart 1, section P</a>, as <a href="/grammar.html">the grammar page</a> does. Not for navigation: use the official light list.</p></div>`;
   const meta = {
     title: `${l.name}: ${l.chars[0]}, read word by word`,
     description: `${l.name} (${l.place}) shows ${l.chars[0]}. Played, read one word at a time, and compared with the lights it could be mistaken for.`,
   };
   return { meta, body };
+}
+
+// The light's record in the Light List snapshot, and where it disagrees with
+// the figures the site took from elsewhere.
+function listedSection(l) {
+  const r = l.listed;
+  const mine = parse(l.chars[0]), theirs = parse(r.char);
+  const diff = [];
+  if (l.previously) {
+    const was = parse(l.previously);
+    if (String(was.range) !== String(theirs.range)) diff.push(`a range of ${r.range} miles, where this site, from ${l.sources[0].title} (${l.sources[0].by || "Wikipedia"}), gave ${was.range}`);
+    if (was.height && Math.abs(was.height - theirs.height) > 1) diff.push(`a height of ${r.feet} feet (${theirs.height} m), where this site gave ${was.height} m`);
+  }
+  const dm = (v, h) => `${Math.floor(Math.abs(v))}°${((Math.abs(v) % 1) * 60).toFixed(1)}′ ${h}`;
+  const rows = [
+    ["Light List number", r.llnr],
+    ["Position", `${dm(r.lat, "N")}, ${dm(r.lon, "W")}`],
+    ["Characteristic, as printed", `<code>${esc(r.listed)}</code>`],
+    ["Height", `${r.feet} feet (${theirs.height} m)`],
+    ["Range", `${r.range} nautical miles (nominal)`],
+    ["Structure", esc(r.structure || "Not given")],
+    ["Remarks", esc(r.remarks || "None")],
+  ].filter(([, v]) => v);
+  // The nearest light in the snapshot with the same characteristic.
+  const rad = (x) => (x * Math.PI) / 180;
+  const nm = (a, b) => 2 * 3440.065 * Math.asin(Math.sqrt(Math.sin(rad(b.lat - a.lat) / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(rad(b.lon - a.lon) / 2) ** 2));
+  const word = (x) => x.char.replace(/ \d+(\.\d+)?m.*$/, "");
+  const twins = LL.lights.filter((x) => x.id !== r.id && word(x) === word(r)).map((x) => ({ x, d: nm(r, x) })).sort((a, b) => a.d - b.d);
+  const t0 = twins[0];
+  const sect = (x) => (x.remarks.match(/(?:Red|Green|White) from [^.]*\./) || [""])[0];
+  const sectors = t0 ? [r, t0.x].filter((x) => sect(x)) : [];
+  const twinP = t0 ? `<p>The nearest light on this coast that says the same thing, <code>${esc(word(r))}</code>, is <a href="/lights/${t0.x.id}.html">${esc(t0.x.name)}</a>, ${Math.round(t0.d)} nautical miles away. ${t0.d < r.range + t0.x.range ? `Their listed ranges add up to ${r.range + t0.x.range} miles, so there is water between them in range of both at once (before the horizon is counted; see <a href="/range.html">range</a>). There ${theirs.rhythm === "F" ? "a steady light gives the stopwatch nothing to time" : "the stopwatch reads the same at both"}, and ${sectors.length ? `only colour or the chart can say which is which: the list gives ${and(sectors.map((x) => `${esc(x.name)} a sector, "${esc(sect(x))}"`))} The list gives such bearings "as observed from a vessel toward the light" (<a href="https://navcen.uscg.gov/sites/default/files/pdf/msi/LightList_V1_2024.pdf">front matter, 2024</a>).` : `neither has a coloured sector in the list, so only the bearing and the chart can say which is which.`}` : `That is farther than their listed ranges added together (${r.range + t0.x.range} miles), so no water is in range of both at once, and the characteristic alone names the light.`}${twins.length > 1 ? ` It is one of ${n2w(twins.length + 1)} lights on this coast that show it.` : ""}</p>` : `<p>No other lighthouse from Maine to New Jersey in this list shows <code>${esc(word(r))}</code>.</p>`;
+  l._twin = twinP;
+  return `<h2 id="listed">In the Light List</h2>
+<div class="prose">
+<p>The US Coast Guard's Light List, Volume I, weekly edition of ${LL_DATE}, entry ${r.llnr}. Heights there are in feet above mean high water; this site converts them to metres for the notation.${/HORN/.test(r.remarks) ? ` A horn's pattern is written <code>2s bl-2s si</code>: a two-second blast, then two seconds of silence.` : ""}</p>
+${l.fromList ? "" : twinP}
+${diff.length ? `<p class="disagree"><strong>Changed from this site's earlier figures:</strong> the list gives ${and(diff)}. The list is the newer and the official source, so the notation at the top of this page now follows it.</p>` : ""}
+<table class="rule-table listed"><tbody>
+${rows.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join("\n")}
+</tbody></table>
+</div>`;
+}
+
+// The Light List lighthouses down the coast, state by state, in list order.
+const STATES = ["Maine", "New Hampshire", "Massachusetts", "Rhode Island", "Connecticut", "New York", "New Jersey"];
+function coastTable() {
+  const rows = lights.filter((l) => l.listed).sort((a, b) => STATES.indexOf(a.listed.state) - STATES.indexOf(b.listed.state) || parseFloat(a.listed.llnr) - parseFloat(b.listed.llnr));
+  const count = new Map();
+  for (const l of rows) { const k = features(l.chars[0]); const key = `${k.c.rhythm}|${(k.c.groups || [1]).join("+")}|${k.c.colors[0]}|${k.period}`; count.set(key, (count.get(key) || 0) + 1); l._key = key; }
+  return `<div class="table-wrap"><table class="rule-table every coast">
+<thead><tr><th>Characteristic</th><th>Light</th><th>The first ${AXIS} seconds</th></tr></thead>
+${STATES.flatMap((st) => [[st, true], [st, false]]).map(([st, sea]) => {
+    const g = rows.filter((l) => l.listed.state === st && (parseFloat(l.listed.llnr) < 1000) === sea);
+    if (!g.length) return "";
+    return `<tbody><tr class="per"><th colspan="3">${st}, ${sea ? "seacoast" : "coast, bays and harbours"}: ${n2w(g.length)} light${g.length > 1 ? "s" : ""}</th></tr>
+${g.map((l) => `<tr><td><code>${esc(l.chars[0].replace(/ \d+(\.\d+)?m.*$/, ""))}</code></td><td><a href="/lights/${l.id}.html">${esc(l.name)}</a>${count.get(l._key) > 1 ? ` <small>one of ${n2w(count.get(l._key))} on this coast</small>` : ""}</td><td>${strip(l.chars[0])}${features(l.chars[0]).period > AXIS ? `<small>continues to ${r2(features(l.chars[0]).period)} s</small>` : ""}</td></tr>`).join("\n")}
+</tbody>`;
+  }).join("\n")}
+</table></div>`;
 }
 
 // A static strip of the first 20 seconds, so periods can be compared down a column.
@@ -309,6 +389,9 @@ function render(src) {
   body = body.replace(/<light char="([^"]+)"(?: id="([^"]+)")?(?: label="([^"]+)")?(?: timing="([^"]+)")?><\/light>/g, (_, ch, id, label, timing) => lightFigure(ch, { id, label, timing }));
   body = body.replace(/<lights-gallery><\/lights-gallery>/g, () => `<div class="gallery">\n${lights.filter((l) => l.gallery !== false).map(lightCard).join("\n")}\n</div>`);
   body = body.replace(/<light-table><\/light-table>/g, () => lightTable());
+  body = body.replace(/<coast-table><\/coast-table>/g, () => coastTable());
+  body = body.replace(/<ll-count><\/ll-count>/g, () => String(LL.lights.length));
+  body = body.replace(/<ll-date><\/ll-date>/g, () => LL_DATE);
   body = body.replace(/<light-index><\/light-index>/g, () => `<script type="application/json" id="light-index">${JSON.stringify(lightIndex()).replace(/</g, "\\u003c")}</script>`);
   return { meta, body };
 }
@@ -325,7 +408,7 @@ function check(file, html) {
     /href="https:\/\/unpromptedworks\.com\/#about"/,
   ];
   for (const re of need) if (!re.test(html)) throw new Error(`${file}: missing ${re}`);
-  if (/<light |<lights-gallery>|<light-index>/.test(html)) throw new Error(`${file}: unexpanded tag`);
+  if (/<light |<lights-gallery>|<light-index>|<coast-table>|<ll-/.test(html)) throw new Error(`${file}: unexpanded tag`);
 }
 
 rmSync(OUT, { recursive: true, force: true });
