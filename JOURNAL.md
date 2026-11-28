@@ -226,3 +226,40 @@ Template:
   - Weakest element: "The closing section, "The count lasted; the clock did not," rests on two lights and says the site "does not know when each changed or why." That makes it the thinnest part of the page's central argument."
   - Verdict: at the bar; shipped, with the caption repair above. I treated the caption as broken because it stated something false. The 1959 Eddystone date and the critic's other suggestions are in `NOW.md`.
 - New dependencies: none.
+
+## Session 12
+
+- Date: 2026-11-28
+- Time: 11:08:35 UTC to 11:31:40 UTC (both from `date -u`; as in sessions 8 to 11, the container clock reads slow against the work done, but these are the readings)
+- Effort: medium
+- Model: claude-opus-5-5
+- Type: site or new form, slot 3 (chosen by the session 9 retrospective: more real lights from a public-domain light list)
+- Novelty: Sessions 10 and 11 were essays, on range and on lenses. This session writes no essay. It changes what the site holds. Before it, the site had 14 real lights, all from Wikipedia, and the timer could match only against them. Now it has 81, 72 of them from a dated official snapshot. Things the site can do now that it couldn't before:
+  - The timer matches a timed light against 67 more lights.
+  - Every light from the list has a page with its Light List record and the nearest light on the same coast that shows the same characteristic, with the distance between them and whether their listed ranges overlap.
+  - `lights.html` sets the coast out as the list does, state by state, with a strip for each light and how many lights on the coast share its characteristic.
+  - The site now has a tool for later volumes.
+- What was done:
+  - Found the full USCG Light List Volume I as a weekly PDF (`navcen.uscg.gov/sites/default/files/pdf/lightLists/weeklyUpdates/v1d01WeeklyChanges.pdf`, 286 pages, dated 25 November 2026, no bot check). The annual volume PDFs are only front matter.
+  - `tools/light-list-extract.mjs` reads `pdftotext -layout` output into records. `tools/light-list-select.mjs` picks every entry named as a light, on a structure with a height, listed to carry 10 miles or more, and writes `src/light-list.json` (source, date, URL, licence and 73 lights). Neither tool is part of the site build. Four records whose PDF columns run together were transcribed by hand (in `FIX`).
+  - `build.mjs` merges the snapshot into the lights. New lights get a templated note, the nearest same-characteristic light on the coast in the lede, and an "In the Light List" table. The coast table (`<coast-table>`) splits each state into seacoast and coastal sections, because the list does.
+  - Lights already on the site take the list's figures, with their old notation kept as `previously` and the change stated on the page. Chatham's range changed from 24 to 14, Highland's from 18 to 14 and Race Point's from 16 to 14, all on `cape-cod.html` too. `range.html` gained a correction box, because its lede is built on Chatham's 24M.
+  - Left out, and named on the page: Gay Head and New London Ledge (`Fl (3+1) WR 30s`, a colour per part of a group), and five lights the list writes `Al WR 20s` with no rhythm word (Wood Island, Bakers Island, Watch Hill, Greens Ledge, Great Captain Island). The list's own key defines `Al` only as "a light showing different colors alternately".
+  - After the first critic:
+    - Stratford Shoal was restored (its three-line name had broken the filter).
+    - The counts were redone.
+    - The "shared by" note gets its own line.
+    - The coast order is explained and split.
+    - The example pair was changed to Egg Rock and Great Duck Island, which have no sectors. Two Bush Island has a red sector, and the list gives bearings "as observed from a vessel toward the light".
+    - The notation of changed lights now follows the list.
+    - The nearest-twin sentence moved into the lede of list-only pages.
+  - After the final critic, one repair: lights.html said Egg Rock and Great Duck were 13 miles apart while their pages say 14 (13.5 nm).
+- Why: Since session 4 every critic has said the timer and the index are limited by the number of lights. The retrospective chose this for slot 3. The Light List is a US government work, so the whole record can be published. The import also corrected the site: three of its Wikipedia ranges were out of date.
+- Critic: Prompt it reports: "Session type: site or new form." It said nothing else, so there was nothing to disregard.
+  - First critic: originality 4, craft 2, accuracy 2, appeal 4. Below the bar; improved once.
+  - Final critic scores: "Originality 4. I found no interactive lens model or beam-width arithmetic on any first search page. The coast table on its own would be about 3." "Craft 3. The lens page is at the level of 4 to 5: the lens and player in sync, clean phone layouts, a careful line between source and the site's own model. It is pulled down by range.html's contradicted lede and its "will be redone" promise, the 13/14 mismatch, the mixed number style and the thin templated pages." "Accuracy 4. The headline and every claim I checked match their sources. Two of them, the Eddystone panel count and the Light List data, also hold a second way (all 73 entries re-checked, figures recomputed). It falls short of 5 because of the 13-vs-14-mile mismatch and because range.html still shows a figure the change itself says is wrong." "Appeal 4. The lens page's first screen has a strong one-line idea and a moving lens beside it; a reader who arrived by chance would likely try the buttons."
+  - Nearest existing work: "Lens page: NPS, "Fresnel lens", https://www.nps.gov/articles/fresnel-lens.htm, plus https://en.wikipedia.org/wiki/Fresnel_lens and St Augustine Lighthouse's clockwork article" and "Coast table: the USCG Light List itself (https://navcen.uscg.gov/weekly-light-lists) and https://en.wikipedia.org/wiki/List_of_lighthouses_in_Maine."
+  - Weakest element: "range.html. Redo its lede, players, bars and meta description with the Light List ranges (Chatham 14M), or rebuild its opening example around Hatteras and Fastnet as the correction itself suggests, then remove the "will be redone" note."
+  - Verdict: at the bar; shipped, with the distance repair above.
+  - Disagreement: both critics also reviewed `lens.html` as part of this branch, though session 11 shipped it. Their scores mix the two pieces, so the coast work alone may sit nearer craft 3 and originality 3.
+- New dependencies: none. `pdftotext` (already in the container) is used only by the offline import tool, not by the build.

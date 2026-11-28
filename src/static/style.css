@@ -286,3 +286,7 @@ p { margin: 0 0 1em; }
   .ln-table td:first-child { font-weight: 700; }
   .ln-table td:first-child::before { content: none; }
 }
+/* A light's record in the Light List */
+.rule-table.listed td:first-child { font-family: inherit; white-space: normal; width: 38%; color: var(--dim); }
+.prose .disagree { border-left: 2px solid var(--lamp-y); padding-left: 0.8rem; }
+.rule-table.coast td:nth-child(2) small { display: block; color: var(--dim); }

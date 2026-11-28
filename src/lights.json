@@ -130,7 +130,7 @@
     "name": "Highland",
     "place": "North Truro, Cape Cod, Massachusetts, USA",
     "chars": [
-      "Fl W 5s 52m 18M"
+      "Fl W 5s 52m 14M"
     ],
     "note": "Once one steady light on one tower, told from Chatham by its two towers and from Nauset by its three: you counted points of light along the horizon. Its single flash now says the one the tower used to. On the outer arm of the Cape its period is what sets it apart: 5 s, where Race Point, the only other single white flash there, takes 10.",
     "sources": [
@@ -140,14 +140,15 @@
       }
     ],
     "gallery": false,
-    "page": "cape-cod.html"
+    "page": "cape-cod.html",
+    "previously": "Fl W 5s 52m 18M"
   },
   {
     "id": "chatham",
     "name": "Chatham",
     "place": "Chatham, Cape Cod, Massachusetts, USA",
     "chars": [
-      "Fl(2) W 10s 24m 24M"
+      "Fl(2) W 10s 24m 14M"
     ],
     "note": "Lit in 1808 with two towers, where Truro had one. In 1923 the northern tower was taken down and moved about twelve miles north, where it became Nauset Light. The station still says two, now in time: the only group flash on the outer arm of the Cape.",
     "sources": [
@@ -157,7 +158,8 @@
       }
     ],
     "gallery": false,
-    "page": "cape-cod.html"
+    "page": "cape-cod.html",
+    "previously": "Fl(2) W 10s 24m 24M"
   },
   {
     "id": "nauset",
@@ -186,7 +188,7 @@
     "name": "Race Point",
     "place": "Provincetown, Cape Cod, Massachusetts, USA",
     "chars": [
-      "Fl W 10s 12m 16M"
+      "Fl W 10s 12m 14M"
     ],
     "note": "First lit on 5 November 1816 with one of the earliest revolving lights, which set it apart from Highland's steady one. When it failed to revolve in thick weather, vessels took it for Highland: three in the winter of 1842, the schooner Saluda in 1845. Today it flashes once every ten seconds, Highland every five.",
     "sources": [
@@ -201,7 +203,8 @@
       }
     ],
     "gallery": false,
-    "page": "cape-cod.html"
+    "page": "cape-cod.html",
+    "previously": "Fl W 10s 12m 16M"
   },
   {
     "id": "wood-end",
